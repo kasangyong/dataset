@@ -11,7 +11,15 @@ from dataclasses import dataclass
 
 from dagster import AssetsDefinition
 
-from pipeline.sources import arxiv, crypto, fx, github_repos, hackernews, yna_news
+from pipeline.sources import (
+    arxiv,
+    clinical_trials,
+    crypto,
+    fx,
+    github_repos,
+    hackernews,
+    yna_news,
+)
 
 
 @dataclass(frozen=True)
@@ -42,6 +50,10 @@ SOURCES = [
     Source("github_repos", "깃허브 신규 저장소", github_repos.github_repos),
     Source("hn_stories", "해커뉴스 인기글", hackernews.hn_stories),
     Source("arxiv_papers", "arXiv 신규 논문", arxiv.arxiv_papers),
+    # The registry posts by US Eastern date, which is still in progress when the
+    # daily run fires. Two days back is the first complete one.
+    Source("clinical_trials", "임상시험 신규 등록", clinical_trials.clinical_trials,
+           lag_days=2),
     Source("crypto_markets", "암호화폐 시세", crypto.crypto_markets,
            lag_days=0, backfillable=False),
     Source("yna_news", "연합뉴스 헤드라인", yna_news.yna_news,

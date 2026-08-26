@@ -44,3 +44,21 @@ def test_hourly_sources_merge_rather_than_overwrite():
     # final read.
     for name in HOURLY_SOURCES:
         assert BY_NAME[name].merge_key, f"{name} would discard earlier reads"
+
+
+def test_clinical_trials_waits_for_the_registry_day_to_close():
+    # StudyFirstPostDate is a US Eastern date; at 06:00 KST the previous KST
+    # day is still mid-afternoon there.
+    assert BY_NAME["clinical_trials"].lag_days == 2
+
+
+def test_sources_with_legitimately_empty_days_say_so():
+    # An empty day must be either a declared possibility or a failure -- never
+    # a quiet zero. The registry posts nothing at weekends, and a feed can find
+    # nothing new in a quiet hour.
+    from pipeline.sources import clinical_trials, fx, yna_news
+
+    assert clinical_trials.ALLOW_EMPTY is True
+    assert yna_news.ALLOW_EMPTY is True
+    # A source that always has data must not declare it.
+    assert not hasattr(fx, "ALLOW_EMPTY")

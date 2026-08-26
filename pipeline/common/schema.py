@@ -87,3 +87,29 @@ class YnaNews(Record):
     link: str
     author: str | None
     published: str
+
+
+class ClinicalTrial(Record):
+    nct_id: str
+    title: str
+    status: str
+    study_type: str | None
+    phases: list[str]
+    enrollment: int | None
+    enrollment_type: str | None  # ACTUAL once the trial has run, ESTIMATED before
+    lead_sponsor: str | None
+    sponsor_class: str | None
+    conditions: list[str]
+    interventions: list[str]
+    primary_outcomes: list[str]
+    brief_summary: str | None
+    sex: str | None
+    minimum_age: str | None
+    maximum_age: str | None
+    healthy_volunteers: bool | None
+    countries: list[str]
+    start_date: str | None
+    completion_date: str | None
+    first_posted: str | None
+    last_update_posted: str | None
+    url: str

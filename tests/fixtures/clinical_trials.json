@@ -1,0 +1,826 @@
+{
+  "total": 214,
+  "fetched": 3,
+  "pages": [
+    {
+      "studies": [
+        {
+          "protocolSection": {
+            "identificationModule": {
+              "nctId": "NCT07783178",
+              "orgStudyIdInfo": {
+                "id": "EARLY-GLOW"
+              },
+              "organization": {
+                "fullName": "DCB Research AG",
+                "class": "OTHER"
+              },
+              "briefTitle": "EARLY Pregnancy GLucose prOfiles in Women With and Without GDM Risk Factors: EARLY-GLOW",
+              "officialTitle": "EARLY Pregnancy GLucose prOfiles in Women With and Without GDM Risk Factors: EARLY-GLOW",
+              "acronym": "EARLY-GLOW"
+            },
+            "statusModule": {
+              "statusVerifiedDate": "2026-08",
+              "overallStatus": "RECRUITING",
+              "expandedAccessInfo": {
+                "hasExpandedAccess": false
+              },
+              "startDateStruct": {
+                "date": "2026-08-19",
+                "type": "ACTUAL"
+              },
+              "primaryCompletionDateStruct": {
+                "date": "2027-04-30",
+                "type": "ESTIMATED"
+              },
+              "completionDateStruct": {
+                "date": "2027-04-30",
+                "type": "ESTIMATED"
+              },
+              "studyFirstSubmitDate": "2026-08-20",
+              "studyFirstSubmitQcDate": "2026-08-20",
+              "studyFirstPostDateStruct": {
+                "date": "2026-08-24",
+                "type": "ACTUAL"
+              },
+              "lastUpdateSubmitDate": "2026-08-20",
+              "lastUpdatePostDateStruct": {
+                "date": "2026-08-24",
+                "type": "ACTUAL"
+              }
+            },
+            "sponsorCollaboratorsModule": {
+              "responsibleParty": {
+                "type": "SPONSOR"
+              },
+              "leadSponsor": {
+                "name": "DCB Research AG",
+                "class": "OTHER"
+              }
+            },
+            "oversightModule": {
+              "oversightHasDmc": false,
+              "isFdaRegulatedDrug": false,
+              "isFdaRegulatedDevice": false
+            },
+            "descriptionModule": {
+              "briefSummary": "Background:\n\nGestational diabetes mellitus (GDM) is associated with increased maternal and neonatal complications, including macrosomia, preeclampsia, and long-term metabolic consequences for both mother and child. Current screening methods, primarily the oral glucose tolerance test (OGTT), are typically performed between 24 and 28 weeks of gestation and may miss earlier metabolic alterations. Continuous glucose monitoring (CGM) offers a detailed assessment of glucose dynamics and could potentially identify subtle dysglycemia before GDM becomes clinically apparent.\n\nObjective:\n\nThe EARLY-GLOW study aims to characterize glucose patterns during early pregnancy and identify CGM-derived thresholds for early dysglycemia in women with and without established risk factors for GDM. The study seeks to determine whether specific combinations of glucose level and duration of hyperglycemic exposure can distinguish women at increased risk of GDM before routine diagnosis. Additionally, it will explore the relationship between glucose profiles and modifiable lifestyle factors such as diet, physical activity, sleep, and stress, while evaluating the feasibility, usability, and acceptance of CGM technology during pregnancy.\n\nStudy Design:\n\nEARLY-GLOW is a prospective, decentralized, observational pilot study conducted in Switzerland from July 2026 to June 2027. The study will recruit 48 pregnant women with singleton pregnancies at approximately 12 weeks of gestation. Participants will be stratified into two equal groups: women with at least one recognized GDM risk factor and women without risk factors.\n\nMethods:\n\nParticipants will wear a blinded Dexcom G7 CGM continuously from approximately gestational week 12 until routine OGTT screening between weeks 24 and 28 (up to 16 weeks of monitoring). During the study, participants will periodically record fasting blood glucose measurements, dietary intake, meal photographs, sleep quality, physical activity, stress, and well-being through REDCap questionnaires. In the final two weeks of follow-up, participants may additionally use an unblinded FreeStyle Libre 3 CGM to assess user experience. Pregnancy outcomes will be collected approximately six weeks postpartum.\n\nEndpoints:\n\nThe primary endpoint is the identification of CGM-derived thresholds combining glucose concentration and duration of exposure that best discriminate between women with and without GDM risk factors. Secondary outcomes include the frequency and duration of hyperglycemic events, time above and below glucose target range, glycemic variability, postprandial glucose excursions, nocturnal glucose patterns, correlations with lifestyle factors, and device adherence and usability.",
+              "detailedDescription": "The EARLY-GLOW study is a prospective, decentralized observational pilot study that aims to improve understanding of glucose regulation during early pregnancy and identify early signs of gestational diabetes mellitus (GDM) before conventional diagnosis. While current GDM screening relies primarily on an oral glucose tolerance test (OGTT) performed between 24 and 28 weeks of gestation, growing evidence suggests that disturbances in glucose metabolism may already be detectable much earlier in pregnancy. Continuous glucose monitoring (CGM) offers the opportunity to capture detailed glucose patterns throughout the day and may reveal subtle abnormalities that are not identified through standard screening methods.\n\nThe study will recruit 48 pregnant women with singleton pregnancies at approximately 12 weeks of gestation from across Switzerland. Participants will be stratified into two groups: women with at least one established risk factor for GDM and women without known risk factors. Risk factors include obesity, previous gestational diabetes, a family history of type 2 diabetes, polycystic ovary syndrome, previous macrosomic offspring, bariatric surgery, and certain ethnic backgrounds associated with increased GDM risk.\n\nAfter enrolment, participants will wear a blinded Dexcom G7 continuous glucose monitor for approximately 12 to 16 weeks, covering the period from early pregnancy until routine GDM screening. Because the sensor is blinded, participants will not be able to see their glucose values during the main observation period, minimizing the risk that knowledge of glucose levels influences behavior. At regular intervals, participants will also record fasting blood glucose measurements, upload meal photos, document nutritional intake, and complete questionnaires regarding sleep, stress, well-being, physical activity, and pregnancy-related symptoms. During the final two weeks of follow-up, participants may additionally wear an unblinded FreeStyle Libre 3 sensor to evaluate user experience and compare acceptance of the two most commonly used CGM systems in Switzerland.\n\nThe primary objective of the study is to identify CGM-derived thresholds that characterize early dysglycemia in pregnancy. Rather than focusing solely on a glucose value, the study aims to determine combinations of glucose level and duration of exposure that best distinguish women with and without GDM risk factors. This approach acknowledges that the clinical significance of elevated glucose levels may depend not only on how high glucose rises, but also on how long those elevations persist.\n\nSecondary objectives include comparing the frequency and duration of hyperglycemic episodes between risk groups, assessing time spent above and below target glucose ranges, evaluating measures of glycemic variability, and characterizing postprandial and nocturnal glucose patterns. The study will also investigate the relationship between glucose profiles and lifestyle factors such as diet, sleep quality, physical activity, stress, and well-being. Furthermore, participant adherence, device wear time, comfort, usability, and acceptance of the CGM systems will be assessed to determine the feasibility of large-scale CGM use during pregnancy.\n\nTo analyze the data, researchers will use both traditional statistical methods and exploratory pattern-recognition techniques. Receiver operating characteristic (ROC) analyses will be applied to identify glucose thresholds and durations that best discriminate between women at higher and lower risk of GDM. In addition, clustering and glucose-profile analyses will be used to describe different glycemic phenotypes during pregnancy and to identify potentially clinically relevant patterns.\n\nThe study is observational, no therapeutic interventions are performed. Participants may benefit indirectly from the nutritional consultation offered at the end of the study, during which glucose data and dietary habits are reviewed with a nutrition specialist. More importantly, the knowledge generated by the study may contribute to improved screening strategies, earlier identification of women at risk for GDM, and the future development of personalized preventive interventions."
+            },
+            "conditionsModule": {
+              "conditions": [
+                "Gestational Diabetes"
+              ],
+              "keywords": [
+                "gestational diabetes",
+                "risk factors",
+                "decentralizes study",
+                "dysglycaemia"
+              ]
+            },
+            "designModule": {
+              "studyType": "OBSERVATIONAL",
+              "patientRegistry": false,
+              "designInfo": {
+                "observationalModel": "CASE_CONTROL",
+                "timePerspective": "PROSPECTIVE"
+              },
+              "enrollmentInfo": {
+                "count": 48,
+                "type": "ESTIMATED"
+              }
+            },
+            "armsInterventionsModule": {
+              "armGroups": [
+                {
+                  "label": "Pregnant women with at least one risk factor for GDM",
+                  "description": "Risk factors include obesity, previous gestational diabetes, a family history of type 2 diabetes, polycystic ovary syndrome, previous macrosomic offspring, bariatric surgery, and certain ethnic backgrounds associated with increased GDM risk."
+                },
+                {
+                  "label": "Pregnant women with no risk factors for GDM",
+                  "description": "Risk factors include obesity, previous gestational diabetes, a family history of type 2 diabetes, polycystic ovary syndrome, previous macrosomic offspring, bariatric surgery, and certain ethnic backgrounds associated with increased GDM risk."
+                }
+              ]
+            },
+            "outcomesModule": {
+              "primaryOutcomes": [
+                {
+                  "measure": "CGM-derived threshold(s) for early dysglycemia during pregnancy",
+                  "description": "Identification of one or more continuous glucose monitoring (CGM)-derived thresholds combining glucose concentration and duration of hyperglycemic exposure that best discriminate between pregnant women with and without risk factors for gestational diabetes mellitus (GDM). Thresholds will be identified using receiver operating characteristic (ROC) analyses based on CGM data collected during early pregnancy.",
+                  "timeFrame": "From 12 weeks of gestation until routine OGTT screening (24-28 weeks of gestation; up to 16 weeks of CGM monitoring)"
+                }
+              ],
+              "secondaryOutcomes": [
+                {
+                  "measure": "Number of hyperglycemic events per day",
+                  "description": "Mean number of hyperglycemic events per participant per day, defined as sensor glucose values \\>7.8 mmol/L for at least 10 consecutive minutes.",
+                  "timeFrame": "From 12 to 28 weeks of gestation (during CGM wear period)"
+                },
+                {
+                  "measure": "Time spent above 7.8 mmol/L",
+                  "description": "Average duration per day (minutes/day) with sensor glucose values \\>7.8 mmol/L.",
+                  "timeFrame": "From 12 to 28 weeks of gestation"
+                },
+                {
+                  "measure": "Time above 7.8 mmol/L and time to >7.8 mmol/L after logged-in meals",
+                  "description": "Time after logged-in meal that individual spends \\>7.8 mmol/L and timing when first value postprandial \\>7.8 mmol/L",
+                  "timeFrame": "From 12 to 28 weeks of gestation"
+                },
+                {
+                  "measure": "Time to Return to Preprandial Glucose Following Meals",
+                  "description": "Time required for postprandial glucose levels measured by continuous glucose monitoring (CGM) to return to the pre-meal glucose value after participant-logged meals.",
+                  "timeFrame": "From 12 to 28 weeks of gestation"
+                },
+                {
+                  "measure": "Mean 24-hour glucose concentration",
+                  "description": "Average sensor glucose concentration (mmol/L) over a 24-hour period during the monitoring phase.",
+                  "timeFrame": "From 12 to 28 weeks of gestation"
+                },
+                {
+                  "measure": "Time above range (TAR)",
+                  "description": "Percentage of time with sensor glucose values \\>7.8 mmol/L as measured by CGM.",
+                  "timeFrame": "From 12 to 28 weeks of gestation"
+                },
+                {
+                  "measure": "Time below range (TBR)",
+                  "description": "Percentage of time with sensor glucose values \\<3.5 mmol/L as measured by CGM.",
+                  "timeFrame": "From 12 to 28 weeks of gestation"
+                },
+                {
+                  "measure": "Glycemic variability",
+                  "description": "Glycemic variability assessed using standard deviation (SD) and coefficient of variation (CV) of CGM glucose values.",
+                  "timeFrame": "From 12 to 28 weeks of gestation"
+                },
+                {
+                  "measure": "Nocturnal glucose profile",
+                  "description": "Mean nocturnal glucose concentration (mmol/L) during predefined nighttime hours.",
+                  "timeFrame": "From 12 to 28 weeks of gestation"
+                },
+                {
+                  "measure": "Nocturnal hypoglycemia",
+                  "description": "Percentage of nighttime spent with sensor glucose values \\<3.5 mmol/L.",
+                  "timeFrame": "From 12 to 28 weeks of gestation"
+                },
+                {
+                  "measure": "Association between CGM metrics and lifestyle factors",
+                  "description": "Correlation between CGM-derived glycemic metrics and participant-reported measures of dietary intake, sleep quality, physical activity, and stress.",
+                  "timeFrame": "From 12 to 28 weeks of gestation"
+                },
+                {
+                  "measure": "CGM device usability and acceptance",
+                  "description": "Participant-reported usability and acceptability of Dexcom G7 and FreeStyle Libre 3, including ease of use, comfort, wearability, and overall user experience.",
+                  "timeFrame": "End of follow-up (26-28 weeks of gestation)"
+                },
+                {
+                  "measure": "CGM adherence",
+                  "description": "Adherence to CGM use measured by percentage of planned monitoring time with valid sensor data and discontinuation rates.",
+                  "timeFrame": "From 12 to 28 weeks of gestation"
+                },
+                {
+                  "measure": "Device-related adverse events",
+                  "description": "Number and nature of device-related adverse events, including skin reactions and technical issues associated with CGM use.",
+                  "timeFrame": "From first sensor application until end of follow-up (up to 16 weeks)"
+                }
+              ]
+            },
+            "eligibilityModule": {
+              "eligibilityCriteria": "Inclusion Criteria:\n\n* Female sex\n* Aged ≥18 years at inclusion\n* Pregnant with singleton ≤12 GW\n* Willingness to wear a CGM device for 12-16 weeks\n* Signed informed consent\n\nExclusion Criteria:\n\n* Pre-existing type 1 or type 2 diabetes mellitus or known prediabetes\n* Diagnosis of GDM during current pregnancy\n* Known allergy to adhesive materials or sensor components\n* Inability to follow procedures or insufficient knowledge of project languages (German, French or English)\n* Inability to give consent.",
+              "healthyVolunteers": true,
+              "sex": "FEMALE",
+              "genderBased": true,
+              "genderDescription": "Pregnant women",
+              "minimumAge": "18 Years",
+              "stdAges": [
+                "ADULT",
+                "OLDER_ADULT"
+              ],
+              "studyPopulation": "The study plans to recruit 48 pregnant women who are approximately in the 12th week of gestation (GW).\n\nPotential study participants will be stratified into two mutually exclusive groups: individuals without risk factor according to the Swiss Expertenbrief No. 8118 or at least one with the exception of age \\>35 years, which will not be considered for the stratification allocation. The following risks will be considered:\n\n* History of bariatric surgery\n* Pre-pregnancy BMI \\>30 kg/m²\n* Non-European background (Africa, Asia, Latin America)\n* First-degree relative with type 2 diabetes\n* Previous gestational diabetes\n* Previous macrosomic (\\>4000 g) offspring\n* Diagnosis of polycystic ovary syndrome (PCOS) or polyendocrine metabolic ovarian syndrome (PMOS)\n* Early pregnancy symptoms suggestive of diabetes (e.g. frequent urination, excessive thirst, glucosuria)",
+              "samplingMethod": "NON_PROBABILITY_SAMPLE"
+            },
+            "contactsLocationsModule": {
+              "centralContacts": [
+                {
+                  "name": "Martina Rothenbühler, PhD",
+                  "role": "CONTACT",
+                  "phone": "+41792628989",
+                  "email": "martina.rothenbuehler@dcberne.com"
+                },
+                {
+                  "name": "Stefanie Hossmann, MSc",
+                  "role": "CONTACT",
+                  "phone": "+41794217376",
+                  "email": "stefanie.hossmann@dcberne.com"
+                }
+              ],
+              "overallOfficials": [
+                {
+                  "name": "Jardena Puder, Prof",
+                  "affiliation": "Centre hospitalier universitaire vaudois (CHUV)",
+                  "role": "STUDY_CHAIR"
+                }
+              ],
+              "locations": [
+                {
+                  "facility": "DCB Research AG",
+                  "status": "RECRUITING",
+                  "city": "Bern",
+                  "state": "Canton of Bern",
+                  "zip": "3010",
+                  "country": "Switzerland",
+                  "contacts": [
+                    {
+                      "name": "Martina Rothenbühler, PhD",
+                      "role": "CONTACT",
+                      "phone": "+41792628989",
+                      "email": "martina.rothenbuehler@dcberne.com"
+                    },
+                    {
+                      "name": "Stefanie Hossmann, MSc",
+                      "role": "CONTACT",
+                      "phone": "+41794217376",
+                      "email": "stefanie.hossmann@dcberne.com"
+                    }
+                  ],
+                  "geoPoint": {
+                    "lat": 46.94809,
+                    "lon": 7.44744
+                  }
+                }
+              ]
+            },
+            "ipdSharingStatementModule": {
+              "ipdSharing": "UNDECIDED"
+            }
+          },
+          "derivedSection": {
+            "miscInfoModule": {
+              "versionHolder": "2026-08-25"
+            },
+            "conditionBrowseModule": {
+              "meshes": [
+                {
+                  "id": "D016640",
+                  "term": "Diabetes, Gestational"
+                }
+              ],
+              "ancestors": [
+                {
+                  "id": "D011248",
+                  "term": "Pregnancy Complications"
+                },
+                {
+                  "id": "D005261",
+                  "term": "Female Urogenital Diseases and Pregnancy Complications"
+                },
+                {
+                  "id": "D000091642",
+                  "term": "Urogenital Diseases"
+                },
+                {
+                  "id": "D003920",
+                  "term": "Diabetes Mellitus"
+                },
+                {
+                  "id": "D044882",
+                  "term": "Glucose Metabolism Disorders"
+                },
+                {
+                  "id": "D008659",
+                  "term": "Metabolic Diseases"
+                },
+                {
+                  "id": "D009750",
+                  "term": "Nutritional and Metabolic Diseases"
+                },
+                {
+                  "id": "D004700",
+                  "term": "Endocrine System Diseases"
+                }
+              ]
+            }
+          },
+          "hasResults": false
+        },
+        {
+          "protocolSection": {
+            "identificationModule": {
+              "nctId": "NCT07782944",
+              "orgStudyIdInfo": {
+                "id": "2025IITLL-10"
+              },
+              "organization": {
+                "fullName": "Guilin Medical University, China",
+                "class": "OTHER"
+              },
+              "briefTitle": "CD38 Targeted -PET/ CT for Multiple Myeloma",
+              "officialTitle": "Clinical Investigation of CD38-Targeted Molecular Imaging Probes in Multiple Myeloma"
+            },
+            "statusModule": {
+              "statusVerifiedDate": "2026-07",
+              "overallStatus": "RECRUITING",
+              "expandedAccessInfo": {
+                "hasExpandedAccess": false
+              },
+              "startDateStruct": {
+                "date": "2026-07-07",
+                "type": "ACTUAL"
+              },
+              "primaryCompletionDateStruct": {
+                "date": "2030-12-31",
+                "type": "ESTIMATED"
+              },
+              "completionDateStruct": {
+                "date": "2030-12-31",
+                "type": "ESTIMATED"
+              },
+              "studyFirstSubmitDate": "2026-08-20",
+              "studyFirstSubmitQcDate": "2026-08-20",
+              "studyFirstPostDateStruct": {
+                "date": "2026-08-24",
+                "type": "ACTUAL"
+              },
+              "lastUpdateSubmitDate": "2026-08-20",
+              "lastUpdatePostDateStruct": {
+                "date": "2026-08-24",
+                "type": "ACTUAL"
+              }
+            },
+            "sponsorCollaboratorsModule": {
+              "responsibleParty": {
+                "type": "PRINCIPAL_INVESTIGATOR",
+                "investigatorFullName": "Wei Fu",
+                "investigatorTitle": "Department of Nuclear Medicine",
+                "investigatorAffiliation": "Guilin Medical University, China"
+              },
+              "leadSponsor": {
+                "name": "Guilin Medical University, China",
+                "class": "OTHER"
+              }
+            },
+            "oversightModule": {
+              "oversightHasDmc": true,
+              "isFdaRegulatedDrug": false,
+              "isFdaRegulatedDevice": false
+            },
+            "descriptionModule": {
+              "briefSummary": "The objective of the study is to construct a noninvasive approach CD38 targeted PET/CT to detect tumor lesions in patients with Multiple Myeloma and to compare with FDG PET/CT.",
+              "detailedDescription": "CD38 targeting PET radiotracer is promising as an excellent imaging agent applicable to Multiple Myeloma. In this research, subjects with Multiple Myeloma or highly suspected recurrence detection underwent contemporaneous CD38 PET/CT and standard-of-care imaging (FDG PET/CT) either for an initial assessment or for metastases or highly suspected recurrence detection. Tumor uptake was quantified by the maximum standard uptake value (SUVmax). The numbers of positive tumor lesions of standard-of-care imaging and FDG PET/CT were recorded by visual interpretation. The diagnostic accuracy of CD38 PET/CT was calculated and compared to standard-of-care imaging."
+            },
+            "conditionsModule": {
+              "conditions": [
+                "Multiple Myeloma (MM), Lymphoma, Large B-Cell, Diffuse (DLBCL), Lymphoma"
+              ],
+              "keywords": [
+                "CD38",
+                "PET/CT",
+                "radiotracer",
+                "Multiple Myeloma"
+              ]
+            },
+            "designModule": {
+              "studyType": "INTERVENTIONAL",
+              "phases": [
+                "NA"
+              ],
+              "designInfo": {
+                "allocation": "NA",
+                "interventionModel": "SINGLE_GROUP",
+                "primaryPurpose": "DIAGNOSTIC",
+                "maskingInfo": {
+                  "masking": "NONE"
+                }
+              },
+              "enrollmentInfo": {
+                "count": 100,
+                "type": "ESTIMATED"
+              }
+            },
+            "armsInterventionsModule": {
+              "armGroups": [
+                {
+                  "label": "CD38 PET/CT",
+                  "type": "EXPERIMENTAL",
+                  "description": "Each subject receives a single intravenous injection of radiolabeld CD38 and undergoes PET/CT imaging within the specified time.",
+                  "interventionNames": [
+                    "Diagnostic Test: standard-of-care imaging (FDG PET/CT), CD38 PET/CT"
+                  ]
+                }
+              ],
+              "interventions": [
+                {
+                  "type": "DIAGNOSTIC_TEST",
+                  "name": "standard-of-care imaging (FDG PET/CT), CD38 PET/CT",
+                  "description": "Each subject receives a single intravenous injection of standard-of-care imaging radiopharmaceutical (FDG) and CD38, and undergoes PET/CT imaging within the specified time.",
+                  "armGroupLabels": [
+                    "CD38 PET/CT"
+                  ]
+                }
+              ]
+            },
+            "outcomesModule": {
+              "primaryOutcomes": [
+                {
+                  "measure": "Diagnostic efficacy",
+                  "description": "The sensitivity, specificity, and accuracy of standard-of-care imaging (FDG PET/CT) and CD38 PET/CT were calculated and compared to evaluate the diagnostic accuracy.",
+                  "timeFrame": "3 year"
+                }
+              ],
+              "secondaryOutcomes": [
+                {
+                  "measure": "Number of lesions",
+                  "description": "The numbers of positive primary and metastatic lesions of standard-of-care imaging (FDG PET/CT) and CD38 PET/CT were recorded by visual interpretation.",
+                  "timeFrame": "3 year"
+                },
+                {
+                  "measure": "SUV",
+                  "description": "Standardized uptake value (SUV) of standard-of-care imaging (FDG PET/CT) and CD38 PET/CT for each target lesion of subject or suspected primary tumor or/and metastasis.",
+                  "timeFrame": "3 year"
+                }
+              ]
+            },
+            "eligibilityModule": {
+              "eligibilityCriteria": "Inclusion Criteria:\n\n* Adult patients (aged 18 years or older);\n* Patients with newly diagnosed, highly suspected recurrence or previously treated metastases of Multiple Myeloma (supporting evidence may include MRI, CT, tumor markers, and pathology report);\n* Patients who had scheduled both standard-of-care imaging (FDG PET/CT) and cd38 PET/CT scans;\n* Patients who were able to provide informed consent (signed by participant, parent or legal representative) and assent according to the guidelines of the Clinical Research Ethics Committee.\n\nExclusion Criteria:\n\n* The inability or unwillingness of the research participant or legal representative to provide written informed consent.",
+              "healthyVolunteers": false,
+              "sex": "ALL",
+              "minimumAge": "18 Years",
+              "stdAges": [
+                "ADULT",
+                "OLDER_ADULT"
+              ]
+            },
+            "contactsLocationsModule": {
+              "centralContacts": [
+                {
+                  "name": "Xingyu Mu, M.D.",
+                  "role": "CONTACT",
+                  "phone": "86 13347631119",
+                  "email": "muxingyu1992@hotmail.com"
+                },
+                {
+                  "name": "Wei Fu",
+                  "role": "CONTACT",
+                  "email": "fuwei19700513@163.com"
+                }
+              ],
+              "locations": [
+                {
+                  "facility": "The First Affliated Hospital of Guilin Medical University",
+                  "status": "RECRUITING",
+                  "city": "Guilin",
+                  "state": "Guangxi",
+                  "zip": "541001",
+                  "country": "China",
+                  "contacts": [
+                    {
+                      "name": "Xingyu Mu",
+                      "role": "CONTACT",
+                      "phone": "86 13347631119",
+                      "email": "muxingyu1992@hotmail.com"
+                    }
+                  ],
+                  "geoPoint": {
+                    "lat": 25.28022,
+                    "lon": 110.29639
+                  }
+                }
+              ]
+            },
+            "ipdSharingStatementModule": {
+              "ipdSharing": "NO"
+            }
+          },
+          "derivedSection": {
+            "miscInfoModule": {
+              "versionHolder": "2026-08-25"
+            },
+            "conditionBrowseModule": {
+              "meshes": [
+                {
+                  "id": "D009101",
+                  "term": "Multiple Myeloma"
+                },
+                {
+                  "id": "D008223",
+                  "term": "Lymphoma"
+                }
+              ],
+              "ancestors": [
+                {
+                  "id": "D054219",
+                  "term": "Neoplasms, Plasma Cell"
+                },
+                {
+                  "id": "D009370",
+                  "term": "Neoplasms by Histologic Type"
+                },
+                {
+                  "id": "D009369",
+                  "term": "Neoplasms"
+                },
+                {
+                  "id": "D020141",
+                  "term": "Hemostatic Disorders"
+                },
+                {
+                  "id": "D014652",
+                  "term": "Vascular Diseases"
+                },
+                {
+                  "id": "D002318",
+                  "term": "Cardiovascular Diseases"
+                },
+                {
+                  "id": "D010265",
+                  "term": "Paraproteinemias"
+                },
+                {
+                  "id": "D001796",
+                  "term": "Blood Protein Disorders"
+                },
+                {
+                  "id": "D006402",
+                  "term": "Hematologic Diseases"
+                },
+                {
+                  "id": "D006425",
+                  "term": "Hemic and Lymphatic Diseases"
+                },
+                {
+                  "id": "D006474",
+                  "term": "Hemorrhagic Disorders"
+                },
+                {
+                  "id": "D008232",
+                  "term": "Lymphoproliferative Disorders"
+                },
+                {
+                  "id": "D007160",
+                  "term": "Immunoproliferative Disorders"
+                },
+                {
+                  "id": "D007154",
+                  "term": "Immune System Diseases"
+                },
+                {
+                  "id": "D008206",
+                  "term": "Lymphatic Diseases"
+                }
+              ]
+            }
+          },
+          "hasResults": false
+        },
+        {
+          "protocolSection": {
+            "identificationModule": {
+              "nctId": "NCT07781306",
+              "orgStudyIdInfo": {
+                "id": "CTOO20084GZA"
+              },
+              "organization": {
+                "fullName": "Cancer Research Antwerp",
+                "class": "OTHER"
+              },
+              "briefTitle": "PrOspEctive Metastases Imaging (POEM)",
+              "officialTitle": "Prospective Complete Histopathological Characterization of Liver Metastases From Colorectal and Breast Carcinoma to Predict the Histopathological Growth Patterns by Medical Imaging - PrOspEctive Metastases Imaging (POEM)",
+              "acronym": "POEM"
+            },
+            "statusModule": {
+              "statusVerifiedDate": "2026-08",
+              "overallStatus": "RECRUITING",
+              "expandedAccessInfo": {
+                "hasExpandedAccess": false
+              },
+              "startDateStruct": {
+                "date": "2020-09-08",
+                "type": "ACTUAL"
+              },
+              "primaryCompletionDateStruct": {
+                "date": "2027-12",
+                "type": "ESTIMATED"
+              },
+              "completionDateStruct": {
+                "date": "2028-05",
+                "type": "ESTIMATED"
+              },
+              "studyFirstSubmitDate": "2021-02-15",
+              "studyFirstSubmitQcDate": "2026-08-19",
+              "studyFirstPostDateStruct": {
+                "date": "2026-08-24",
+                "type": "ACTUAL"
+              },
+              "lastUpdateSubmitDate": "2026-08-19",
+              "lastUpdatePostDateStruct": {
+                "date": "2026-08-24",
+                "type": "ACTUAL"
+              }
+            },
+            "sponsorCollaboratorsModule": {
+              "responsibleParty": {
+                "type": "PRINCIPAL_INVESTIGATOR",
+                "investigatorFullName": "Peter Vermeulen",
+                "investigatorTitle": "Scientific Coordinator",
+                "investigatorAffiliation": "Cancer Research Antwerp"
+              },
+              "leadSponsor": {
+                "name": "Cancer Research Antwerp",
+                "class": "OTHER"
+              }
+            },
+            "oversightModule": {
+              "oversightHasDmc": false,
+              "isFdaRegulatedDrug": false,
+              "isFdaRegulatedDevice": false
+            },
+            "descriptionModule": {
+              "briefSummary": "This is a non-interventional, observational study with an optional interventional biobanking activity. Liver metastases of patients undergoing partial hepatectomy will be sampled completely while respecting the orientation used for medical imaging, in order to correlate the histopathological growth patterns in a 3D-map with the imaging characteristics. The full pathological sampling will only use remnant tissue.",
+              "detailedDescription": "Colon cancer is a major cause of death among different cancer types. The tumor in the colon can often be treated with curative intent (by surgery, possibly in combination with medication (chemotherapy)). However, in the vast majority of patients who die from colon cancer, metastases are the real cause of death. This usually involves liver metastases. These metastases can be surgically removed and patients are often treated peri-operatively with chemotherapy or other medication although this treatment is not always successful. The existing method, eg a clinical risk score, that is being used to predict which patient will benefit from a specific treatment of liver metastases is inaccurate.\n\nOver the past fifteen years, the investigators of the Translational Cancer Research Unit have conducted research that explains, at least partly, why not all liver metastases from colon cancer behave in the same way. These differences can be observed by histopathological examination. Surprisingly, liver metastases behave in two very different ways, or growth patterns, and this information is currently not being used in clinical practice. However, the biological differences in the behavior of the cancer cells between these two growth patterns are pronounced. In one growth pattern - \"desmoplastic\" - the cancer cells behave as in the primary colon cancer itself: they form groups and create new supportive tissue - or \"desmoplasia\" - and blood vessels - or \"angiogenesis\". Inflammation is often present in this type of metastases. In the other growth pattern - 'replacement' - the cancer cells behave in a special way: they take the place of, or 'replace', the normal cells of the liver, the hepatocytes, and use the available supporting tissue and blood vessels of the host. There is no formation of new blood vessels and there is often little or no inflammation. When more than one growth pattern is present in a liver metastasis, the relative contribution of each growth pattern is estimated (percentage).\n\nThese different growth patterns contain important information on the success of the treatment of the individual patient. A large retrospective study of 732 patients, where liver metastases from colon cancer were surgically removed, identified a group of patients (19%) with an exclusive desmoplastic growth pattern in all sections of the resected liver metastasis. This subgroup is associated with good survival and progression-free survival. In contrast, patients with any amount of replacement growth, have a significantly shorter overall survival. However, large retrospective studies have shown that these patients with a 'replacement' growth pattern have a survival advantage of adjuvant treatment, i.e. after surgery for liver metastasis, often a combination of chemotherapy and a treatment that inhibits angiogenesis (for example bevacizumab) is given. This is in contrast to patients with the \"desmoplastic\" growth pattern, the intrinsically more favorable pattern, where this treatment has no survival benefit and is therefore probably not necessary after surgery. These patients may be the so-called \"oligometastatic\" patients who may benefit from repeated local targeted therapies. The prognostic and predictive value of the growth patterns has been demonstrated not only in patients with colorectal cancer but also in patients with uveal melanoma, skin melanoma and breast carcinoma.\n\nThe concept of tumor growth patterns is innovative (and still underexposed in the scientific literature) and offers important perspectives for clinical application. Anti-angiogenic treatment as well as immunotherapy achieved poor results in clinical studies of metastatic colon cancer. The investigators are convinced that a better selection of patients based on characteristics of the liver metastasis, and not only based on characteristics of the primary colon tumor, could lead to success in clinical studies.\n\nThus, the growth patterns have an important clinical value and provide the treating physician with yet unknown information about the behavior of a liver metastasis in an individual patient. The limitation, of course, is that the growth pattern can only be determined after hepatic surgery. It would be much more useful to be able to identify the growth patterns by means of medical imaging, allowing the treatment to be tailored to the patient even before surgery. (for example; is there an additional benefit of starting chemotherapy prior to surgery?) Therefore, the aim of the current project is to ascertain whether the investigators can identify the growth patterns of these tumors by means of imaging with CT (computed tomography) or MRI (nuclear spin tomography). Some published studies suggest that medical imaging can capture the histopathological growth patterns, but these are all retrospective studies with a small number of patients and incomplete pathological sampling of the liver metastases. One study in 2007 correlated the early peri-lesional gadolinium enhancement of the liver metastasis with the presence of the desmoplastic reaction with vascular proliferation and inflammation. More recently, a study of Cheng and colleagues claimed that the prediction of the growth patterns would be possible with radiomics based on CT images.\n\nBy identifying the growth patterns in a non-invasive manner, by means of medical imaging, the investigators will be able to use the growth patterns in prospective clinical studies to truly test the predictive power.\n\nThis project concerns liver metastases of primary colorectal carcinoma as well as primary breast carcinoma. The research will therefore mainly, but not only, help patients with liver metastases of colorectal cancer and breast cancer when a translation of this project from the pre-clinical phase (explorative study) to the clinical phase (randomized studies with patients) is done."
+            },
+            "conditionsModule": {
+              "conditions": [
+                "Liver Metastases",
+                "Colorectal Cancer",
+                "Breast Cancer"
+              ],
+              "keywords": [
+                "Histopathological growth pattern",
+                "Radiomics"
+              ]
+            },
+            "designModule": {
+              "studyType": "OBSERVATIONAL",
+              "patientRegistry": true,
+              "targetDuration": "1 Year",
+              "designInfo": {
+                "observationalModel": "OTHER",
+                "timePerspective": "PROSPECTIVE"
+              },
+              "enrollmentInfo": {
+                "count": 50,
+                "type": "ESTIMATED"
+              }
+            },
+            "outcomesModule": {
+              "primaryOutcomes": [
+                {
+                  "measure": "Radiomics Analysis Pipeline The imaging analysis has been designed to predict the continuous proportion and spatial distribution of HGPs",
+                  "description": "Radiomics Analysis Pipeline The imaging analysis has been designed to predict the continuous proportion and spatial distribution of HGPs. CT will be the principal modality because it is routinely acquired in patients undergoing liver surgery and is more broadly available for subsequent validation. MRI will be analyzed in a complementary exploratory framework when anatomical sequences are available. Analyses will be performed at three linked spatial scales: (a) the entire metastasis and its concentric peritumoral environment; (b) localized CT patches corresponding to histologically mapped interface segments; and (c) the background liver as an organ-level biological context. Handcrafted radiomics, foundation-model embeddings and localized patch analysis will be used.",
+                  "timeFrame": "7 years"
+                }
+              ]
+            },
+            "eligibilityModule": {
+              "eligibilityCriteria": "Inclusion Criteria:\n\n1. ≥ 18 years old.\n2. Patients with liver metastatic colorectal or breast carcinoma undergoing a surgical excision of the liver metastases\n3. Therapy-naive patients as well as patients with neo-adjuvant therapy are eligible for inclusion\n4. Willingness of the patient to participate in this study demonstrated by signed written informed consent\n\nExclusion Criteria:\n\n1. Patients without MRI or CT of the liver prior to surgery\n2. Time interval between medical imaging, CT and/or MRI is more than 12 weeks (nb: time interval is preferably less than 4 weeks but this is not an exclusion criterium)\n3. Prior radiofrequency ablation (RFA) or transarterial chemoembolization (TACE) on the liver metastasis that would be operated",
+              "healthyVolunteers": false,
+              "sex": "ALL",
+              "minimumAge": "18 Years",
+              "stdAges": [
+                "ADULT",
+                "OLDER_ADULT"
+              ],
+              "studyPopulation": "Patients with liver metastatic colorectal or breast carcinoma undergoing a surgical excision of the liver metastases",
+              "samplingMethod": "NON_PROBABILITY_SAMPLE"
+            },
+            "contactsLocationsModule": {
+              "centralContacts": [
+                {
+                  "name": "Peter Vermeulen, MD, PhD",
+                  "role": "CONTACT",
+                  "phone": "0032493194745",
+                  "email": "peter.vermeulen@zas.be"
+                },
+                {
+                  "name": "Emily Latacz, MD",
+                  "role": "CONTACT",
+                  "phone": "0032476547112",
+                  "email": "emily.latacz@zas.be"
+                }
+              ],
+              "locations": [
+                {
+                  "facility": "GZA St Augustinus",
+                  "status": "RECRUITING",
+                  "city": "Wilrijk",
+                  "state": "Antwerp",
+                  "zip": "2610",
+                  "country": "Belgium",
+                  "contacts": [
+                    {
+                      "name": "Peter Vermeulen, MD",
+                      "role": "CONTACT",
+                      "phone": "0032493194745",
+                      "email": "peter.vermeulen@zas.be"
+                    },
+                    {
+                      "name": "Emily Latacz, MD",
+                      "role": "CONTACT",
+                      "phone": "0032476547112",
+                      "email": "emily.latacz@zas.be"
+                    }
+                  ],
+                  "geoPoint": {
+                    "lat": 51.16734,
+                    "lon": 4.39513
+                  }
+                }
+              ]
+            },
+            "ipdSharingStatementModule": {
+              "ipdSharing": "UNDECIDED"
+            }
+          },
+          "documentSection": {
+            "largeDocumentModule": {
+              "largeDocs": [
+                {
+                  "typeAbbrev": "Prot",
+                  "hasProtocol": true,
+                  "hasSap": false,
+                  "hasIcf": false,
+                  "label": "Study Protocol",
+                  "date": "2024-12-17",
+                  "uploadDate": "2026-08-19T05:13",
+                  "filename": "Prot_000.pdf",
+                  "size": 1276250
+                }
+              ]
+            }
+          },
+          "derivedSection": {
+            "miscInfoModule": {
+              "versionHolder": "2026-08-25"
+            },
+            "conditionBrowseModule": {
+              "meshes": [
+                {
+                  "id": "D015179",
+                  "term": "Colorectal Neoplasms"
+                },
+                {
+                  "id": "D001943",
+                  "term": "Breast Neoplasms"
+                }
+              ],
+              "ancestors": [
+                {
+                  "id": "D007414",
+                  "term": "Intestinal Neoplasms"
+                },
+                {
+                  "id": "D005770",
+                  "term": "Gastrointestinal Neoplasms"
+                },
+                {
+                  "id": "D004067",
+                  "term": "Digestive System Neoplasms"
+                },
+                {
+                  "id": "D009371",
+                  "term": "Neoplasms by Site"
+                },
+                {
+                  "id": "D009369",
+                  "term": "Neoplasms"
+                },
+                {
+                  "id": "D004066",
+                  "term": "Digestive System Diseases"
+                },
+                {
+                  "id": "D005767",
+                  "term": "Gastrointestinal Diseases"
+                },
+                {
+                  "id": "D003108",
+                  "term": "Colonic Diseases"
+                },
+                {
+                  "id": "D007410",
+                  "term": "Intestinal Diseases"
+                },
+                {
+                  "id": "D012002",
+                  "term": "Rectal Diseases"
+                },
+                {
+                  "id": "D001941",
+                  "term": "Breast Diseases"
+                },
+                {
+                  "id": "D012871",
+                  "term": "Skin Diseases"
+                },
+                {
+                  "id": "D017437",
+                  "term": "Skin and Connective Tissue Diseases"
+                }
+              ]
+            }
+          },
+          "hasResults": false
+        }
+      ],
+      "totalCount": 214
+    }
+  ]
+}

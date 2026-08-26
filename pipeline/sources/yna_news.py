@@ -22,6 +22,8 @@ from pipeline.common.schema import YnaNews
 SOURCE = "yna_news"
 ENDPOINT = "https://www.yna.co.kr/rss/news.xml"
 DC = "{http://purl.org/dc/elements/1.1/}"
+# An hourly read can legitimately find nothing new in a quiet hour.
+ALLOW_EMPTY = True
 
 
 def fetch(dt: str) -> Any:
@@ -67,6 +69,5 @@ def yna_news(context: AssetExecutionContext) -> MaterializeResult:
         normalize=normalize,
         model=YnaNews,
         merge_key="guid",
-        # An hourly read can legitimately find nothing new in a quiet hour.
-        allow_empty=True,
+        allow_empty=ALLOW_EMPTY,
     )

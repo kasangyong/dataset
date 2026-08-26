@@ -5,13 +5,22 @@ from pydantic import ValidationError
 
 from pipeline.common.schema import (
     ArxivPaper,
+    ClinicalTrial,
     CryptoMarket,
     FxRate,
     GithubRepo,
     HnStory,
     YnaNews,
 )
-from pipeline.sources import arxiv, crypto, fx, github_repos, hackernews, yna_news
+from pipeline.sources import (
+    arxiv,
+    clinical_trials,
+    crypto,
+    fx,
+    github_repos,
+    hackernews,
+    yna_news,
+)
 from tests.conftest import DT
 
 # Normalizers do not stamp observation time -- the collector does. Tests that
@@ -26,6 +35,7 @@ CASES = [
     (hackernews, HnStory, "hn_stories"),
     (arxiv, ArxivPaper, "arxiv_papers"),
     (crypto, CryptoMarket, "crypto_markets"),
+    (clinical_trials, ClinicalTrial, "clinical_trials"),
 ]
 
 
@@ -193,3 +203,35 @@ def test_yna_stores_no_article_body(load_fixture, fixture_meta):
     assert set(records[0]) == set(YnaNews.model_fields) - {"collected_at"}
     # The feed's description is a lede, not the article.
     assert len(records[0]["summary"] or "") < 500
+
+
+def test_clinical_trials_flattens_the_registry_modules(load_fixture):
+    records = clinical_trials.normalize(load_fixture("clinical_trials"), DT)
+
+    assert records
+    trial = records[0]
+    assert trial["nct_id"].startswith("NCT")
+    assert trial["url"].endswith(trial["nct_id"])
+    assert trial["status"]
+    # Design, endpoints and eligibility live in separate modules upstream; the
+    # point of the normalizer is that one row answers a question.
+    assert isinstance(trial["phases"], list)
+    assert isinstance(trial["conditions"], list)
+    assert isinstance(trial["primary_outcomes"], list)
+
+
+def test_clinical_trials_reads_every_page(load_fixture):
+    # The registry pages by token; a normalizer that saw only the first page
+    # would silently drop most of a day.
+    payload = load_fixture("clinical_trials")
+    one_page = clinical_trials.normalize(payload, DT)
+
+    doubled = {**payload, "pages": payload["pages"] + payload["pages"]}
+    assert len(clinical_trials.normalize(doubled, DT)) == 2 * len(one_page)
+
+
+def test_clinical_trials_stores_registry_metadata_only(load_fixture):
+    # Protocol summaries and aggregate design, never patient-level records.
+    records = clinical_trials.normalize(load_fixture("clinical_trials"), DT)
+
+    assert set(records[0]) == set(ClinicalTrial.model_fields) - {"collected_at"}
