@@ -1,0 +1,80 @@
+name: collect
+
+on:
+  schedule:
+    # 21:00 UTC = 06:00 KST, after the previous KST day has fully closed.
+    # GitHub may delay scheduled runs under load, and disables them on repos
+    # with no activity for 60 days -- the daily data commit keeps that alive.
+    - cron: "0 21 * * *"
+  workflow_dispatch:
+    inputs:
+      start_date:
+        description: "First partition date (YYYY-MM-DD). Blank = yesterday KST."
+        required: false
+      end_date:
+        description: "Last partition date, inclusive. Blank = same as start."
+        required: false
+      sources:
+        description: "Comma-separated source names. Blank = all."
+        required: false
+
+permissions:
+  contents: write
+
+# Two runs writing the same partitions would race on the data commit.
+concurrency:
+  group: collect
+  cancel-in-progress: false
+
+jobs:
+  collect:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+
+    steps:
+      - uses: actions/checkout@v7
+
+      - uses: astral-sh/setup-uv@v10
+        with:
+          enable-cache: true
+
+      - name: Install dependencies
+        run: uv sync --extra dev --frozen
+
+      - name: Run tests
+        # Guards against committing data produced by broken normalizers.
+        run: uv run pytest -q
+
+      - name: Collect
+        id: collect
+        env:
+          # Raises the Search API rate limit; no extra secret to manage.
+          GITHUB_TOKEN: ${{ github.token }}
+          # Passed as env rather than interpolated into the script, so a
+          # dispatch input cannot inject shell.
+          START_DATE: ${{ inputs.start_date }}
+          END_DATE: ${{ inputs.end_date }}
+          SOURCES: ${{ inputs.sources }}
+        run: |
+          ARGS=()
+          if [ -n "$START_DATE" ]; then ARGS+=(--start "$START_DATE"); fi
+          if [ -n "$END_DATE" ]; then ARGS+=(--end "$END_DATE"); fi
+          if [ -n "$SOURCES" ]; then ARGS+=(--sources "$SOURCES"); fi
+          uv run python -m pipeline.cli "${ARGS[@]}"
+
+      - name: Commit data
+        # Runs even when a source failed: partial data is still worth keeping,
+        # and the job stays red because the Collect step already failed.
+        if: always()
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          mkdir -p data
+          git add data
+          if git diff --cached --quiet; then
+            echo "no new data to commit"
+            exit 0
+          fi
+          git commit -m "data: collect $(date -u +%Y-%m-%d)"
+          git pull --rebase --autostash
+          git push

@@ -1,0 +1,8 @@
+# CI writes on Linux, development happens on Windows. Without a forced line
+# ending every daily commit would rewrite every file it touches.
+* text=auto eol=lf
+
+*.json.gz binary
+
+# Collected data is machine-written; keep it out of diff stats and reviews.
+data/** linguist-generated=true
