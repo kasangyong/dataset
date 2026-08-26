@@ -48,3 +48,4 @@
 {"bytes_curated": 32513, "bytes_raw": 23467, "dt": "2026-08-25", "duration_s": 0.256, "error": null, "invalid_rows": 0, "rows": 100, "run_at": "2026-08-26T04:04:12Z", "source": "hn_stories", "status": "ok"}
 {"bytes_curated": 669786, "bytes_raw": 244101, "dt": "2026-08-25", "duration_s": 9.358, "error": null, "invalid_rows": 0, "rows": 344, "run_at": "2026-08-26T04:04:22Z", "source": "arxiv_papers", "status": "ok"}
 {"bytes_curated": 33414, "bytes_raw": 18538, "dt": "2026-08-26", "duration_s": 0.144, "error": null, "invalid_rows": 0, "rows": 100, "run_at": "2026-08-26T04:04:22Z", "source": "crypto_markets", "status": "ok"}
+{"bytes_curated": 63167, "bytes_raw": 19389, "dt": "2026-08-26", "duration_s": 1.35, "error": null, "invalid_rows": 0, "rows": 121, "run_at": "2026-08-26T04:05:02Z", "source": "yna_news", "status": "ok"}
