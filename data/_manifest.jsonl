@@ -68,3 +68,4 @@
 {"bytes_curated": 669786, "bytes_raw": 244097, "dt": "2026-08-25", "duration_s": 10.832, "error": null, "invalid_rows": 0, "rows": 344, "run_at": "2026-08-26T05:03:25Z", "source": "arxiv_papers", "status": "ok"}
 {"bytes_curated": 447738, "bytes_raw": 706047, "dt": "2026-08-24", "duration_s": 0.726, "error": null, "invalid_rows": 0, "rows": 214, "run_at": "2026-08-26T05:03:26Z", "source": "clinical_trials", "status": "ok"}
 {"bytes_curated": 33416, "bytes_raw": 18593, "dt": "2026-08-26", "duration_s": 0.084, "error": null, "invalid_rows": 0, "rows": 100, "run_at": "2026-08-26T05:03:26Z", "source": "crypto_markets", "status": "ok"}
+{"bytes_curated": 104284, "bytes_raw": 19005, "dt": "2026-08-26", "duration_s": 1.874, "error": null, "invalid_rows": 0, "rows": 201, "run_at": "2026-08-26T05:26:46Z", "source": "yna_news", "status": "ok"}
