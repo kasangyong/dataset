@@ -145,29 +145,72 @@ sangyong_datasets/
 
 ## 6. 소스 정의
 
-### 6.1 fx_rates — 환율
+소스는 `pipeline/registry.py` 한 곳에 선언한다. 이름과 자산 외에 세 가지 특성을 갖는데,
+무시하면 데이터가 조용히 오염되기 때문에 명시적으로 둔다.
 
-- API: Frankfurter (ECB 기준 환율), 인증 불필요
-- 엔드포인트: `https://api.frankfurter.dev/v1/{date}?base=USD`
-- 산출: 통화별 1행, 약 30행/일
-- 필드: `dt`, `base`, `quote`, `rate`, `rate_date`, `is_stale`
-- `rate_date` 는 API가 실제로 반환한 날짜. `dt != rate_date` 이면 `is_stale=true`
+| 필드 | 뜻 |
+|---|---|
+| `lag_days` | 실행일과 파티션 날짜의 차이. 1이면 완결된 어제, 0이면 읽는 순간의 스냅샷 |
+| `backfillable` | 현재 상태만 알려주는 소스는 False. 과거 날짜로 채우면 오늘 값이 과거 라벨을 단다 |
+| `merge_key` | 설정하면 파티션을 덮어쓰지 않고 이 필드 기준으로 병합 |
+| `hourly` | 피드 노출 창이 짧아 하루 한 번으로는 못 담는 소스 |
 
-### 6.2 github_repos — 당일 생성된 인기 레포
+| 데이터셋 | id | 소스 | lag | 백필 | 주기 |
+|---|---|---|---|---|---|
+| 달러 환율 | `fx_rates` | Frankfurter (ECB) | 1 | 가능 | 일 |
+| 깃허브 신규 저장소 | `github_repos` | GitHub Search API | 1 | 가능 | 일 |
+| 해커뉴스 인기글 | `hn_stories` | HN Algolia | 1 | 가능 | 일 |
+| arXiv 신규 논문 | `arxiv_papers` | arXiv Atom API | 1 | 가능 | 일 |
+| 암호화폐 시세 | `crypto_markets` | CoinGecko | 0 | 불가 | 일 |
+| 연합뉴스 헤드라인 | `yna_news` | 연합뉴스 RSS | 0 | 불가 | **시간** |
 
-- API: GitHub Search API, 인증 선택 (토큰 있으면 rate limit 10배)
-- 쿼리: `created:YYYY-MM-DD`, `sort=stars`, 최대 100건
-- 산출: 레포당 1행
-- 필드: `dt`, `full_name`, `owner`, `language`, `stars`, `forks`, `description`, `topics`, `created_at`, `html_url`
-- 토큰은 `GITHUB_TOKEN` 시크릿 사용 (Actions 기본 제공 토큰)
+### 6.1 fx_rates
 
-### 6.3 hn_stories — Hacker News 전일 상위 글
+`api.frankfurter.dev/v1/{date}?base=USD`. 통화별 1행, 약 29행/일.
+ECB는 영업일당 하나의 환율을 발표하므로 시각 경계가 없다. 실제 발표일을 `rate_date` 에
+기록하고, `dt != rate_date` 이면 `is_stale: true`.
 
-- API: HN Algolia Search, 인증 불필요
-- 엔드포인트: `https://hn.algolia.com/api/v1/search_by_date` + 날짜 범위 필터
-- 산출: 상위 100건
-- 필드: `dt`, `object_id`, `title`, `url`, `author`, `points`, `num_comments`, `created_at`
-- **본문은 저장하지 않는다.** 메타데이터와 링크만 저장해 저작권 문제를 처음부터 회피한다.
+### 6.2 github_repos
+
+`api.github.com/search/repositories`, `created:<KST 자정 범위>`, 스타순 100건.
+토큰은 선택이지만 Actions 기본 토큰을 넘겨 rate limit 을 올린다.
+
+### 6.3 hn_stories
+
+`hn.algolia.com/api/v1/search`, `created_at_i` 를 KST 자정 epoch 범위로 필터. 상위 100건.
+본문은 저장하지 않는다.
+
+### 6.4 arxiv_papers
+
+`export.arxiv.org/api/query`, cs.AI / cs.LG / cs.CL, 제출일 KST 범위. Atom XML.
+100건씩 페이징하며 arXiv 요청 간격 권고(3초)를 지킨다. 상한 800건은 폭주 방지용이고
+초과 시 로그로 알린다 — 조용히 자르지 않는다.
+
+**초록을 저장한다.** arXiv 가 바로 그 용도로 배포하므로 뉴스 본문과 달리 라이선스 문제가 없다.
+대신 용량이 크다: 실측 약 450KB/일로 전체의 85%를 차지하며 연 165MB 규모다.
+
+### 6.5 crypto_markets
+
+`api.coingecko.com/api/v3/coins/markets`, 시총 상위 100.
+**일별 종가가 아니라 현재 시세다.** `last_updated` 가 수 분 전을 가리킨다.
+따라서 `lag_days=0`, `backfillable=False`.
+
+### 6.6 yna_news
+
+연합뉴스 RSS. 제목·요약(리드)·링크만 저장하고 본문은 저장하지 않는다.
+
+**피드가 약 1.5시간치만 담는다** (실측 120건이 88분 범위). 하루 한 번 읽으면 하루의 약 2%다.
+그래서 매시간 읽어 `guid` 기준으로 그날 파티션에 병합한다. 이미 저장된 항목은 그대로 두므로
+`collected_at` 은 "처음 본 시각"을 뜻한다.
+
+병합 소스는 raw 도 읽기마다 따로 남긴다(`raw/<source>/dt=<날짜>/<타임스탬프>.json.gz`).
+덮어쓰면 마지막 읽기만 복원 가능해져 raw 를 두는 이유가 사라진다.
+
+### 6.7 진행 중인 날의 파티션
+
+Dagster 의 `DailyPartitionsDefinition` 은 끝나지 않은 날을 유효한 파티션으로 보지 않는다.
+`lag_days=0` 소스는 정의상 오늘 파티션이 필요하므로 `end_offset=1` 을 준 별도 정의
+(`DAILY_OPEN`)를 쓴다. 완결된 날을 다루는 소스는 기존 `DAILY` 를 그대로 쓴다.
 
 ## 7. 에러 처리
 
@@ -253,6 +296,10 @@ CI 게이트에는 **네트워크 없이 도는 테스트만** 포함한다. 외
 
 ## 12. 미결 사항 (후속 과제)
 
+- **arXiv 용량.** 초록 때문에 연 165MB 로 전체의 85%다. 커지면 이 소스만 curated 를
+  gzip 하거나 카테고리를 줄인다. 지금은 그대로 둔다.
+- **시간당 커밋 빈도.** `yna_news` 때문에 하루 최대 24 커밋이 생긴다. 필요하면 주기를
+  2~3시간으로 늘린다. 피드 창이 1.5시간이므로 그 이상은 누락이 생긴다.
 - 데이터 리텐션 정책. 현재는 무기한 보관. 레포가 커지면 raw 를 N일 후 삭제하거나 데이터 레포를 분리한다.
 - 최종 활용처가 정해지면 curated 를 Parquet 으로 변환하는 단계를 추가할지 결정한다.
 - 뉴스 본문 코퍼스는 라이선스 검토 후 별도 소스로 추가한다.

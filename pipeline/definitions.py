@@ -1,15 +1,11 @@
 """Dagster entry point.
 
-Adding a source: create a module under ``sources/`` exposing an asset, then add
-it to ``ASSETS`` below.
+The source catalog lives in ``pipeline/registry.py``; adding a source means
+adding one entry there.
 """
 
 from dagster import Definitions
 
-from pipeline.sources.fx import fx_rates
-from pipeline.sources.github_repos import github_repos
-from pipeline.sources.hackernews import hn_stories
-
-ASSETS = [fx_rates, github_repos, hn_stories]
+from pipeline.registry import ASSETS
 
 defs = Definitions(assets=ASSETS)

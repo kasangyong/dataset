@@ -1,0 +1,44 @@
+<rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:ns0="http://www.w3.org/2005/Atom" xmlns:ns1="http://purl.org/rss/1.0/modules/syndication/" xmlns:ns3="http://search.yahoo.com/mrss/" version="2.0">
+	<channel>
+		<title>연합뉴스 최신기사</title>
+		<link>https://www.yna.co.kr/news</link>
+		<ns0:link href="https://www.yna.co.kr/rss/news.xml" rel="self" type="application/rss+xml" />
+		<description>연합뉴스 실시간 최신뉴스입니다</description>
+		<language>ko-KR</language>
+		<copyright>저작권자(c) 연합뉴스, 무단 전재-재배포, AI 학습 및 활용 금지</copyright>
+		<ns1:updatePeriod>hourly</ns1:updatePeriod>
+		<ns1:updateFrequency>1</ns1:updateFrequency>
+		<lastBuildDate>Wed, 26 Aug 2026 12:40:26 +0900</lastBuildDate>
+		<pubDate>Wed, 26 Aug 2026 12:40:26 +0900</pubDate>
+		<item>
+			<title>中 남중국해 군사거점 확충…'조기경보 레이더' 추정 시설 포착</title>
+			<link>https://www.yna.co.kr/view/AKR20260826090800083</link>
+			<guid isPermaLink="true">https://www.yna.co.kr/view/AKR20260826090800083</guid>
+			<pubDate>Wed, 26 Aug 2026 12:40:26 +0900</pubDate>
+			<dc:creator>한종구</dc:creator>
+			<description>(베이징=연합뉴스) 한종구 특파원 = 중국이 남중국해 영유권 분쟁 해역인 파라셀 군도(중국명 시사군도)의 한 섬에 조기경보 레이더로 추정되는 시...</description>
+			<ns3:content url="https://img.yna.co.kr/etc/inner/KR/2026/08/26/AKR20260826090800083_01_i_P2.jpg" type="image/jpeg">
+			</ns3:content>
+		</item>
+		<item>
+			<title>中, 환경파괴 문책대상 확대…당정 간부에 국유기업 경영자 추가</title>
+			<link>https://www.yna.co.kr/view/AKR20260826090700083</link>
+			<guid isPermaLink="true">https://www.yna.co.kr/view/AKR20260826090700083</guid>
+			<pubDate>Wed, 26 Aug 2026 12:30:24 +0900</pubDate>
+			<dc:creator>정성조</dc:creator>
+			<description>(베이징=연합뉴스) 정성조 특파원 = 중국이 생태 환경이 훼손될 경우 당·정부 간부는 물론 국유기업 경영진과 공공기관 지도자까지 문책할 수 있도...</description>
+			<ns3:content url="https://img.yna.co.kr/photo/yna/YH/2026/03/05/PYH2026030514770001300_P2.jpg" type="image/jpeg">
+			</ns3:content>
+		</item>
+		<item>
+			<title>[게시판] 국립정신건강센터, 청년 정신건강 커리어 성장캠프</title>
+			<link>https://www.yna.co.kr/view/AKR20260826035600530</link>
+			<guid isPermaLink="true">https://www.yna.co.kr/view/AKR20260826035600530</guid>
+			<pubDate>Wed, 26 Aug 2026 12:30:01 +0900</pubDate>
+			<dc:creator>김잔디</dc:creator>
+			<description>▲ 보건복지부 국립정신건강센터는 26일 국립정신건강센터에서 &amp;apos;2026 청년 정신건강 커리어 성장캠프&amp;apos;를 개최했다. 이번 캠프는 인공지능(AI)과...</description>
+			<ns3:content url="https://img.yna.co.kr/photo/cms/2023/03/13/97/PCM20230313000097990_P2.jpg" type="image/jpeg">
+			</ns3:content>
+		</item>
+		</channel>
+</rss>

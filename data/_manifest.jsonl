@@ -35,3 +35,11 @@
 {"bytes_curated": 4462, "bytes_raw": 325, "dt": "2026-08-25", "duration_s": 0.526, "error": null, "invalid_rows": 0, "rows": 29, "run_at": "2026-08-26T03:45:39Z", "source": "fx_rates", "status": "ok"}
 {"bytes_curated": 52096, "bytes_raw": 43006, "dt": "2026-08-25", "duration_s": 2.398, "error": null, "invalid_rows": 0, "rows": 100, "run_at": "2026-08-26T03:45:41Z", "source": "github_repos", "status": "ok"}
 {"bytes_curated": 32513, "bytes_raw": 23789, "dt": "2026-08-25", "duration_s": 0.663, "error": null, "invalid_rows": 0, "rows": 100, "run_at": "2026-08-26T03:45:42Z", "source": "hn_stories", "status": "ok"}
+{"bytes_curated": 493441, "bytes_raw": 182672, "dt": "2026-08-21", "duration_s": 9.219, "error": null, "invalid_rows": 0, "rows": 254, "run_at": "2026-08-26T04:00:06Z", "source": "arxiv_papers", "status": "ok"}
+{"bytes_curated": 347237, "bytes_raw": 128780, "dt": "2026-08-22", "duration_s": 12.173, "error": null, "invalid_rows": 0, "rows": 182, "run_at": "2026-08-26T04:00:18Z", "source": "arxiv_papers", "status": "ok"}
+{"bytes_curated": 302561, "bytes_raw": 111918, "dt": "2026-08-23", "duration_s": 5.235, "error": null, "invalid_rows": 0, "rows": 159, "run_at": "2026-08-26T04:00:24Z", "source": "arxiv_papers", "status": "ok"}
+{"bytes_curated": 502340, "bytes_raw": 183988, "dt": "2026-08-24", "duration_s": 10.134, "error": null, "invalid_rows": 0, "rows": 263, "run_at": "2026-08-26T04:00:35Z", "source": "arxiv_papers", "status": "ok"}
+{"bytes_curated": 669786, "bytes_raw": 245138, "dt": "2026-08-25", "duration_s": 24.444, "error": null, "invalid_rows": 0, "rows": 344, "run_at": "2026-08-26T04:00:59Z", "source": "arxiv_papers", "status": "ok"}
+{"bytes_curated": 33418, "bytes_raw": 18513, "dt": "2026-08-26", "duration_s": 0.66, "error": null, "invalid_rows": 0, "rows": 100, "run_at": "2026-08-26T04:01:57Z", "source": "crypto_markets", "status": "ok"}
+{"bytes_curated": 62652, "bytes_raw": 19590, "dt": "2026-08-26", "duration_s": 0.114, "error": null, "invalid_rows": 0, "rows": 120, "run_at": "2026-08-26T04:01:57Z", "source": "yna_news", "status": "ok"}
+{"bytes_curated": 62652, "bytes_raw": 19590, "dt": "2026-08-26", "duration_s": 0.185, "error": null, "invalid_rows": 0, "rows": 120, "run_at": "2026-08-26T04:02:12Z", "source": "yna_news", "status": "ok"}

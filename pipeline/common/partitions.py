@@ -15,13 +15,25 @@ from dagster import DailyPartitionsDefinition
 KST = ZoneInfo("Asia/Seoul")
 START_DATE = "2026-08-01"
 
+# Completed days only. A source that reports a finished day has nothing to
+# say about today until today ends.
 DAILY = DailyPartitionsDefinition(start_date=START_DATE, timezone="Asia/Seoul")
 
+# Includes the day in progress, for sources that only ever report "now".
+# Without end_offset Dagster rejects today's key as not yet a partition.
+DAILY_OPEN = DailyPartitionsDefinition(
+    start_date=START_DATE, timezone="Asia/Seoul", end_offset=1
+)
 
-def yesterday_kst(now: datetime | None = None) -> str:
-    """Partition key the scheduled run should target."""
+
+def partition_for(lag_days: int, now: datetime | None = None) -> str:
+    """Partition key a scheduled run should target for a source.
+
+    Sources differ: a completed-day source lags by one day, while a live
+    snapshot has no completed-day form and belongs to the day it is read.
+    """
     current = now or datetime.now(KST)
-    return (current.astimezone(KST).date() - timedelta(days=1)).isoformat()
+    return (current.astimezone(KST).date() - timedelta(days=lag_days)).isoformat()
 
 
 def day_bounds_iso(dt: str) -> tuple[str, str]:

@@ -6,7 +6,7 @@ from dagster import build_asset_context
 from pipeline.common import manifest, storage
 from pipeline.common.collect import EmptyPayloadError, SchemaDriftError, collect
 from pipeline.common.http import FetchError
-from pipeline.common.schema import FxRate
+from pipeline.common.schema import FxRate, YnaNews
 from tests.conftest import DT
 
 SOURCE = "fx_rates"
@@ -172,3 +172,73 @@ def test_normalizers_do_not_supply_the_stamp():
 
     assert "collected_at" not in captured["keys"]
     assert "collected_at" in storage.read_curated(SOURCE, DT)[0]
+
+
+# --- merged sources: a feed too short to cover a day in one read -------------
+
+
+def merge_run(items, dt=DT):
+    """Collect a feed-shaped payload, merging on `guid`."""
+    return collect(
+        build_asset_context(partition_key=dt),
+        source="feed",
+        fetch=lambda d: {"items": items},
+        normalize=lambda payload, d: [
+            {"dt": d, "guid": i["guid"], "title": i["title"], "summary": None,
+             "link": f"https://example.test/{i['guid']}", "author": None,
+             "published": f"2026-08-25T0{i['guid']}:00:00Z"}
+            for i in payload["items"]
+        ],
+        model=YnaNews,
+        merge_key="guid",
+        allow_empty=True,
+    )
+
+
+def item(guid):
+    return {"guid": guid, "title": f"story {guid}"}
+
+
+def test_merged_partition_accumulates_across_reads():
+    merge_run([item("1"), item("2")])
+    merge_run([item("2"), item("3")])  # the feed still lists 2
+
+    guids = [r["guid"] for r in storage.read_curated("feed", DT)]
+    assert guids == ["1", "2", "3"]
+
+
+def test_merging_the_same_items_adds_nothing():
+    merge_run([item("1"), item("2")])
+    result = merge_run([item("1"), item("2")])
+
+    assert result.metadata["rows"] == 2
+
+
+def test_first_sighting_keeps_its_observation_time():
+    # collected_at should say when the item appeared, not when a later read
+    # happened to still list it.
+    merge_run([item("1")])
+    first = storage.read_curated("feed", DT)[0]["collected_at"]
+
+    merge_run([item("1"), item("2")])
+    rows = {r["guid"]: r for r in storage.read_curated("feed", DT)}
+
+    assert rows["1"]["collected_at"] == first
+    assert rows["2"]["collected_at"] >= first
+
+
+def test_each_read_of_a_merged_source_keeps_its_own_raw():
+    # Overwriting would leave raw able to reconstruct only the final read.
+    merge_run([item("1")])
+    merge_run([item("2")])
+
+    raws = sorted((storage.data_root() / "raw" / "feed" / f"dt={DT}").glob("*.json.gz"))
+    assert len(raws) == 2
+
+
+def test_an_empty_read_leaves_the_partition_intact():
+    # Quiet hours are normal for a feed; they must not wipe the day.
+    merge_run([item("1"), item("2")])
+    merge_run([])
+
+    assert len(storage.read_curated("feed", DT)) == 2

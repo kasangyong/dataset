@@ -19,6 +19,18 @@ class FetchError(RuntimeError):
     """Raised when a source endpoint cannot be read."""
 
 
+def get_text(
+    url: str,
+    *,
+    params: dict[str, Any] | None = None,
+    headers: dict[str, str] | None = None,
+    timeout: int = DEFAULT_TIMEOUT,
+) -> str:
+    """Fetch a body without parsing it. For XML feeds and Atom APIs."""
+    response = _get(url, params=params, headers=headers, timeout=timeout, accept="*/*")
+    return response.text
+
+
 def get_json(
     url: str,
     *,
@@ -26,7 +38,23 @@ def get_json(
     headers: dict[str, str] | None = None,
     timeout: int = DEFAULT_TIMEOUT,
 ) -> Any:
-    merged = {"User-Agent": USER_AGENT, "Accept": "application/json"}
+    response = _get(url, params=params, headers=headers, timeout=timeout,
+                    accept="application/json")
+    try:
+        return response.json()
+    except ValueError as exc:
+        raise FetchError(f"{url} returned non-JSON body: {response.text[:300]}") from exc
+
+
+def _get(
+    url: str,
+    *,
+    params: dict[str, Any] | None,
+    headers: dict[str, str] | None,
+    timeout: int,
+    accept: str,
+) -> requests.Response:
+    merged = {"User-Agent": USER_AGENT, "Accept": accept}
     if headers:
         merged.update(headers)
 
@@ -36,10 +64,6 @@ def get_json(
         raise FetchError(f"request to {url} failed: {exc}") from exc
 
     if response.status_code != 200:
-        body = response.text[:300]
-        raise FetchError(f"{url} returned {response.status_code}: {body}")
+        raise FetchError(f"{url} returned {response.status_code}: {response.text[:300]}")
 
-    try:
-        return response.json()
-    except ValueError as exc:
-        raise FetchError(f"{url} returned non-JSON body: {response.text[:300]}") from exc
+    return response

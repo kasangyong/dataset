@@ -3,18 +3,29 @@
 import pytest
 from pydantic import ValidationError
 
-from pipeline.common.schema import FxRate, GithubRepo, HnStory
-from pipeline.sources import fx, github_repos, hackernews
+from pipeline.common.schema import (
+    ArxivPaper,
+    CryptoMarket,
+    FxRate,
+    GithubRepo,
+    HnStory,
+    YnaNews,
+)
+from pipeline.sources import arxiv, crypto, fx, github_repos, hackernews, yna_news
 from tests.conftest import DT
 
 # Normalizers do not stamp observation time -- the collector does. Tests that
 # validate normalizer output supply it the way the collector would.
 STAMP = "2026-08-26T03:04:44Z"
 
+# yna_news is absent on purpose: it filters by partition date, so it is
+# exercised against its own captured day further down.
 CASES = [
     (fx, FxRate, "fx_rates"),
     (github_repos, GithubRepo, "github_repos"),
     (hackernews, HnStory, "hn_stories"),
+    (arxiv, ArxivPaper, "arxiv_papers"),
+    (crypto, CryptoMarket, "crypto_markets"),
 ]
 
 
@@ -129,3 +140,56 @@ def test_hn_query_uses_kst_day_bounds(monkeypatch):
 
     start = int(captured["numericFilters"].split(",")[0].split(">=")[1])
     assert datetime.fromtimestamp(start, timezone.utc).isoformat() == "2026-08-24T15:00:00+00:00"
+
+
+def test_arxiv_keeps_abstracts_and_flattens_whitespace(load_fixture):
+    records = arxiv.normalize(load_fixture("arxiv_papers"), DT)
+
+    assert records
+    paper = records[0]
+    assert len(paper["abstract"]) > 100
+    # Atom wraps text at column width; unwrapped text is what is usable.
+    assert "\n" not in paper["abstract"] and "  " not in paper["abstract"]
+    assert paper["arxiv_id"] and "/" not in paper["arxiv_id"]
+    assert paper["authors"] and all(paper["authors"])
+    assert paper["primary_category"] in paper["categories"]
+
+
+def test_crypto_records_the_sources_own_timestamp(load_fixture):
+    # Distinct from collected_at: one is when the quote was priced, the other
+    # when we read it.
+    records = crypto.normalize(load_fixture("crypto_markets"), DT)
+
+    assert records[0]["last_updated"]
+    assert records[0]["price_usd"] > 0
+    assert records[0]["market_cap_rank"] == 1
+
+
+def test_yna_normalizes_its_captured_day(load_fixture, fixture_meta):
+    dt = fixture_meta("yna_news")["dt"]
+
+    records = yna_news.normalize(load_fixture("yna_news"), dt)
+
+    assert records
+    for record in records:
+        YnaNews.model_validate({**record, "collected_at": STAMP})
+        assert record["dt"] == dt
+        assert record["published"].endswith("Z")
+
+
+def test_yna_drops_items_from_other_days(load_fixture, fixture_meta):
+    # The feed still lists yesterday's items just after midnight.
+    dt = fixture_meta("yna_news")["dt"]
+    other_day = "2020-01-01"
+
+    assert yna_news.normalize(load_fixture("yna_news"), other_day) == []
+    assert yna_news.normalize(load_fixture("yna_news"), dt) != []
+
+
+def test_yna_stores_no_article_body(load_fixture, fixture_meta):
+    dt = fixture_meta("yna_news")["dt"]
+    records = yna_news.normalize(load_fixture("yna_news"), dt)
+
+    assert set(records[0]) == set(YnaNews.model_fields) - {"collected_at"}
+    # The feed's description is a lede, not the article.
+    assert len(records[0]["summary"] or "") < 500

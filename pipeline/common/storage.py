@@ -18,8 +18,17 @@ def data_root() -> Path:
     return Path(os.environ.get("DATASETS_DATA_ROOT", "data"))
 
 
-def raw_path(source: str, dt: str) -> Path:
-    return data_root() / "raw" / source / f"dt={dt}.json.gz"
+def raw_path(source: str, dt: str, part: str | None = None) -> Path:
+    """Path for a partition's raw payload.
+
+    A merged source reads the same partition many times a day, so each read
+    gets its own file -- overwriting would leave raw able to reconstruct only
+    the final read, which is most of the point of keeping it.
+    """
+    base = data_root() / "raw" / source
+    if part:
+        return base / f"dt={dt}" / f"{part}.json.gz"
+    return base / f"dt={dt}.json.gz"
 
 
 def curated_path(source: str, dt: str) -> Path:
@@ -30,13 +39,13 @@ def manifest_path() -> Path:
     return data_root() / "_manifest.jsonl"
 
 
-def write_raw(source: str, dt: str, payload: Any) -> int:
+def write_raw(source: str, dt: str, payload: Any, part: str | None = None) -> int:
     """Store the upstream response verbatim. Returns bytes written.
 
     Kept gzipped: a new file lands every day so diffs carry no information, and
     compression is roughly a 6x saving on a repo that grows forever.
     """
-    path = raw_path(source, dt)
+    path = raw_path(source, dt, part)
     path.parent.mkdir(parents=True, exist_ok=True)
     blob = json.dumps(payload, ensure_ascii=False, separators=(",", ":")).encode("utf-8")
     with gzip.open(path, "wb", compresslevel=6) as fh:

@@ -52,3 +52,38 @@ class HnStory(Record):
     points: int
     num_comments: int
     created_at: str
+
+
+class ArxivPaper(Record):
+    arxiv_id: str
+    title: str
+    abstract: str
+    authors: list[str]
+    primary_category: str
+    categories: list[str]
+    published: str
+    updated: str
+    pdf_url: str | None
+
+
+class CryptoMarket(Record):
+    coin_id: str
+    symbol: str
+    name: str
+    price_usd: float
+    market_cap: int | None
+    market_cap_rank: int | None
+    volume_24h: float | None
+    high_24h: float | None
+    low_24h: float | None
+    change_pct_24h: float | None
+    last_updated: str | None
+
+
+class YnaNews(Record):
+    guid: str
+    title: str
+    summary: str | None  # the feed's lede, not the article body
+    link: str
+    author: str | None
+    published: str

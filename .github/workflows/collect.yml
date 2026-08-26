@@ -4,24 +4,34 @@ on:
   schedule:
     # 21:00 UTC = 06:00 KST, after the previous KST day has fully closed.
     # GitHub may delay scheduled runs under load, and disables them on repos
-    # with no activity for 60 days -- the daily data commit keeps that alive.
+    # with no activity for 60 days -- the data commits keep that alive.
     - cron: "0 21 * * *"
+    # Feed sources expose only the last hour or two, so once a day would miss
+    # almost everything. These read every hour and merge into the day.
+    - cron: "0 * * * *"
   workflow_dispatch:
     inputs:
+      group:
+        description: "Which cadence to run."
+        required: false
+        default: daily
+        type: choice
+        options: [daily, hourly, all]
       start_date:
-        description: "First partition date (YYYY-MM-DD). Blank = yesterday KST."
+        description: "First partition date (YYYY-MM-DD). Blank = each source's due day."
         required: false
       end_date:
         description: "Last partition date, inclusive. Blank = same as start."
         required: false
       sources:
-        description: "Comma-separated source names. Blank = all."
+        description: "Comma-separated source names. Overrides group."
         required: false
 
 permissions:
   contents: write
 
-# Two runs writing the same partitions would race on the data commit.
+# Runs write the same files and push to the same branch; the hourly and daily
+# schedules collide at 21:00 UTC.
 concurrency:
   group: collect
   cancel-in-progress: false
@@ -55,11 +65,22 @@ jobs:
           GITHUB_TOKEN: ${{ github.token }}
           # Passed as env rather than interpolated into the script, so a
           # dispatch input cannot inject shell.
+          SCHEDULE: ${{ github.event.schedule }}
+          INPUT_GROUP: ${{ inputs.group }}
           START_DATE: ${{ inputs.start_date }}
           END_DATE: ${{ inputs.end_date }}
           SOURCES: ${{ inputs.sources }}
         run: |
-          ARGS=()
+          if [ -n "$INPUT_GROUP" ]; then
+            GROUP="$INPUT_GROUP"
+          elif [ "$SCHEDULE" = "0 * * * *" ]; then
+            GROUP=hourly
+          else
+            GROUP=daily
+          fi
+          echo "group: $GROUP"
+
+          ARGS=(--group "$GROUP")
           if [ -n "$START_DATE" ]; then ARGS+=(--start "$START_DATE"); fi
           if [ -n "$END_DATE" ]; then ARGS+=(--end "$END_DATE"); fi
           if [ -n "$SOURCES" ]; then ARGS+=(--sources "$SOURCES"); fi
@@ -78,6 +99,6 @@ jobs:
             echo "no new data to commit"
             exit 0
           fi
-          git commit -m "data: collect $(date -u +%Y-%m-%d)"
+          git commit -m "data: collect $(date -u +%Y-%m-%dT%H:%MZ)"
           git pull --rebase --autostash
           git push
