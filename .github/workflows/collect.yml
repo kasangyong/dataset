@@ -33,6 +33,9 @@ jobs:
 
     steps:
       - uses: actions/checkout@v7
+        with:
+          # The commit step rebases before pushing; a shallow clone cannot.
+          fetch-depth: 0
 
       - uses: astral-sh/setup-uv@v10
         with:

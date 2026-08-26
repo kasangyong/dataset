@@ -13,3 +13,7 @@
 {"bytes_curated": 3312, "bytes_raw": 335, "dt": "2026-08-24", "duration_s": 0.497, "error": null, "invalid_rows": 0, "rows": 29, "run_at": "2026-08-26T02:49:50Z", "source": "fx_rates", "status": "ok"}
 {"bytes_curated": 44220, "bytes_raw": 51871, "dt": "2026-08-24", "duration_s": 2.426, "error": null, "invalid_rows": 0, "rows": 100, "run_at": "2026-08-26T02:49:53Z", "source": "github_repos", "status": "ok"}
 {"bytes_curated": 28201, "bytes_raw": 25469, "dt": "2026-08-24", "duration_s": 0.755, "error": null, "invalid_rows": 0, "rows": 100, "run_at": "2026-08-26T02:49:54Z", "source": "hn_stories", "status": "ok"}
+{"bytes_curated": 43542, "bytes_raw": 50667, "dt": "2026-08-22", "duration_s": 3.101, "error": null, "invalid_rows": 0, "rows": 100, "run_at": "2026-08-26T02:52:17Z", "source": "github_repos", "status": "ok"}
+{"bytes_curated": 40475, "bytes_raw": 49761, "dt": "2026-08-23", "duration_s": 2.548, "error": null, "invalid_rows": 0, "rows": 100, "run_at": "2026-08-26T02:52:20Z", "source": "github_repos", "status": "ok"}
+{"bytes_curated": 39317, "bytes_raw": 49451, "dt": "2026-08-24", "duration_s": 3.062, "error": null, "invalid_rows": 0, "rows": 100, "run_at": "2026-08-26T02:52:23Z", "source": "github_repos", "status": "ok"}
+{"bytes_curated": 48096, "bytes_raw": 43165, "dt": "2026-08-25", "duration_s": 2.473, "error": null, "invalid_rows": 0, "rows": 100, "run_at": "2026-08-26T02:52:25Z", "source": "github_repos", "status": "ok"}

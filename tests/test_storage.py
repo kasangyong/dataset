@@ -60,3 +60,14 @@ def test_partitions_do_not_collide():
 
 def test_reading_a_missing_partition_is_empty_not_an_error():
     assert storage.read_curated("fx_rates", "1999-01-01") == []
+
+
+def test_kst_day_bounds_cover_exactly_one_day():
+    from pipeline.common.partitions import day_bounds_epoch, day_bounds_iso
+
+    start, end = day_bounds_epoch("2026-08-25")
+    assert end - start == 24 * 3600
+    assert day_bounds_iso("2026-08-25") == (
+        "2026-08-25T00:00:00+09:00",
+        "2026-08-25T23:59:59+09:00",
+    )

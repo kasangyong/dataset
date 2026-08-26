@@ -11,7 +11,7 @@ from dagster import AssetExecutionContext, Backoff, MaterializeResult, RetryPoli
 
 from pipeline.common.collect import collect
 from pipeline.common.http import get_json
-from pipeline.common.partitions import DAILY
+from pipeline.common.partitions import DAILY, day_bounds_iso
 from pipeline.common.schema import GithubRepo
 
 SOURCE = "github_repos"
@@ -25,10 +25,14 @@ def fetch(dt: str) -> Any:
     if token:
         headers["Authorization"] = f"Bearer {token}"
 
+    # A bare `created:YYYY-MM-DD` is interpreted as a UTC day, which is not
+    # the day the partition label names. Explicit KST bounds keep this source
+    # joinable with the others on `dt`.
+    start, end = day_bounds_iso(dt)
     return get_json(
         ENDPOINT,
         params={
-            "q": f"created:{dt}",
+            "q": f"created:{start}..{end}",
             "sort": "stars",
             "order": "desc",
             "per_page": PER_PAGE,

@@ -91,3 +91,35 @@ def test_schema_rejects_wrong_type():
                 "is_stale": False,
             }
         )
+
+
+def test_github_query_uses_kst_day_bounds(monkeypatch):
+    # A bare date would be read as a UTC day and would not line up with the
+    # KST partition label the other sources use.
+    captured = {}
+
+    def fake_get_json(url, params=None, headers=None, timeout=30):
+        captured.update(params)
+        return {"items": []}
+
+    monkeypatch.setattr(github_repos, "get_json", fake_get_json)
+    github_repos.fetch("2026-08-25")
+
+    assert captured["q"] == "created:2026-08-25T00:00:00+09:00..2026-08-25T23:59:59+09:00"
+
+
+def test_hn_query_uses_kst_day_bounds(monkeypatch):
+    captured = {}
+
+    def fake_get_json(url, params=None, headers=None, timeout=30):
+        captured.update(params)
+        return {"hits": []}
+
+    monkeypatch.setattr(hackernews, "get_json", fake_get_json)
+    hackernews.fetch("2026-08-25")
+
+    # KST midnight on 2026-08-25 is 2026-08-24T15:00:00Z
+    from datetime import datetime, timezone
+
+    start = int(captured["numericFilters"].split(",")[0].split(">=")[1])
+    assert datetime.fromtimestamp(start, timezone.utc).isoformat() == "2026-08-24T15:00:00+00:00"
