@@ -113,3 +113,44 @@ class ClinicalTrial(Record):
     first_posted: str | None
     last_update_posted: str | None
     url: str
+
+
+class WikipediaTop(Record):
+    project: str  # ko.wikipedia / en.wikipedia
+    rank: int
+    article: str
+    views: int
+
+
+class Earthquake(Record):
+    event_id: str
+    occurred_at: str
+    place: str | None
+    magnitude: float | None
+    magnitude_type: str | None
+    depth_km: float | None
+    latitude: float
+    longitude: float
+    tsunami: int | None
+    felt_reports: int | None
+    significance: int | None
+    url: str | None
+
+
+class CityWeather(Record):
+    city: str
+    latitude: float
+    longitude: float
+    temp_max_c: float | None
+    temp_min_c: float | None
+    temp_mean_c: float | None
+    precipitation_mm: float | None
+    windspeed_max_kmh: float | None
+
+
+class GeekNewsPost(Record):
+    topic_id: str
+    title: str
+    url: str
+    summary: str | None  # the feed's bullet lede, not the article
+    published: str

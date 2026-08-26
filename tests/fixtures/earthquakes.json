@@ -1,0 +1,141 @@
+{
+  "type": "FeatureCollection",
+  "metadata": {
+    "generated": 1787723389000,
+    "url": "https://earthquake.usgs.gov/fdsnws/event/1/query?format=geojson&starttime=2026-08-24T00%3A00%3A00%2B09%3A00&endtime=2026-08-25T00%3A00%3A00%2B09%3A00&minmagnitude=2.5&orderby=time",
+    "title": "USGS Earthquakes",
+    "status": 200,
+    "api": "2.7.0",
+    "count": 58
+  },
+  "features": [
+    {
+      "type": "Feature",
+      "properties": {
+        "mag": 6,
+        "place": "215 km NNE of Lospalos, Timor Leste",
+        "time": 1787580617299,
+        "updated": 1787667579675,
+        "tz": null,
+        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/us6000tn41",
+        "detail": "https://earthquake.usgs.gov/fdsnws/event/1/query?eventid=us6000tn41&format=geojson",
+        "felt": null,
+        "cdi": null,
+        "mmi": 3.987,
+        "alert": "green",
+        "status": "reviewed",
+        "tsunami": 0,
+        "sig": 554,
+        "net": "us",
+        "code": "6000tn41",
+        "ids": ",us6000tn41,usauto6000tn41,attka213,",
+        "sources": ",us,usauto,at,",
+        "types": ",ground-failure,internal-moment-tensor,internal-origin,losspager,moment-tensor,origin,phase-data,shakemap,",
+        "nst": 111,
+        "dmin": 3.208,
+        "rms": 0.78,
+        "gap": 24,
+        "magType": "mww",
+        "type": "earthquake",
+        "title": "M 6.0 - 215 km NNE of Lospalos, Timor Leste"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          127.4598,
+          -6.6264,
+          10
+        ]
+      },
+      "id": "us6000tn41"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "mag": 2.85,
+        "place": "19 km SW of Toms Place, CA",
+        "time": 1787577790670,
+        "updated": 1787591628184,
+        "tz": null,
+        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/nc75424162",
+        "detail": "https://earthquake.usgs.gov/fdsnws/event/1/query?eventid=nc75424162&format=geojson",
+        "felt": null,
+        "cdi": null,
+        "mmi": null,
+        "alert": null,
+        "status": "automatic",
+        "tsunami": 0,
+        "sig": 125,
+        "net": "nc",
+        "code": "75424162",
+        "ids": ",nc75424162,nn00923809,",
+        "sources": ",nc,nn,",
+        "types": ",focal-mechanism,nearby-cities,origin,phase-data,scitech-link,",
+        "nst": 28,
+        "dmin": 0.1435,
+        "rms": 0.06,
+        "gap": 96,
+        "magType": "md",
+        "type": "earthquake",
+        "title": "M 2.9 - 19 km SW of Toms Place, CA"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -118.833335876465,
+          37.4463348388672,
+          2.05999994277954
+        ]
+      },
+      "id": "nc75424162"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "mag": 5,
+        "place": "southern Mid-Atlantic Ridge",
+        "time": 1787574571627,
+        "updated": 1787575724040,
+        "tz": null,
+        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/us6000tn3t",
+        "detail": "https://earthquake.usgs.gov/fdsnws/event/1/query?eventid=us6000tn3t&format=geojson",
+        "felt": null,
+        "cdi": null,
+        "mmi": null,
+        "alert": null,
+        "status": "reviewed",
+        "tsunami": 0,
+        "sig": 385,
+        "net": "us",
+        "code": "6000tn3t",
+        "ids": ",us6000tn3t,",
+        "sources": ",us,",
+        "types": ",origin,phase-data,",
+        "nst": 50,
+        "dmin": 7.939,
+        "rms": 0.51,
+        "gap": 89,
+        "magType": "mb",
+        "type": "earthquake",
+        "title": "M 5.0 - southern Mid-Atlantic Ridge"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -13.8368,
+          -17.7036,
+          10
+        ]
+      },
+      "id": "us6000tn3t"
+    }
+  ],
+  "bbox": [
+    -179.055,
+    -58.7481,
+    0.8,
+    179.911,
+    65.852,
+    224.789
+  ]
+}

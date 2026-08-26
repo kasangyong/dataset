@@ -5,20 +5,28 @@ from pydantic import ValidationError
 
 from pipeline.common.schema import (
     ArxivPaper,
+    CityWeather,
     ClinicalTrial,
+    Earthquake,
+    GeekNewsPost,
     CryptoMarket,
     FxRate,
     GithubRepo,
     HnStory,
+    WikipediaTop,
     YnaNews,
 )
 from pipeline.sources import (
     arxiv,
     clinical_trials,
     crypto,
+    earthquakes,
     fx,
+    geeknews,
     github_repos,
     hackernews,
+    weather,
+    wikipedia,
     yna_news,
 )
 from tests.conftest import DT
@@ -36,6 +44,9 @@ CASES = [
     (arxiv, ArxivPaper, "arxiv_papers"),
     (crypto, CryptoMarket, "crypto_markets"),
     (clinical_trials, ClinicalTrial, "clinical_trials"),
+    (wikipedia, WikipediaTop, "wikipedia_top"),
+    (earthquakes, Earthquake, "earthquakes"),
+    (weather, CityWeather, "city_weather"),
 ]
 
 
@@ -235,3 +246,74 @@ def test_clinical_trials_stores_registry_metadata_only(load_fixture):
     records = clinical_trials.normalize(load_fixture("clinical_trials"), DT)
 
     assert set(records[0]) == set(ClinicalTrial.model_fields) - {"collected_at"}
+
+
+def test_wikipedia_drops_navigation_pages(load_fixture):
+    # The main page outdraws every real article; leaving it in makes the
+    # ranking meaningless.
+    records = wikipedia.normalize(load_fixture("wikipedia_top"), DT)
+
+    titles = {r["article"] for r in records}
+    assert not any(t.startswith(("특수:", "Special:", "위키백과:")) for t in titles)
+    assert "Main_Page" not in titles and "위키백과:대문" not in titles
+
+
+def test_wikipedia_renumbers_ranks_after_filtering(load_fixture):
+    # Ranks must stay contiguous or "top 10" silently means something else.
+    records = wikipedia.normalize(load_fixture("wikipedia_top"), DT)
+
+    for project in {r["project"] for r in records}:
+        ranks = [r["rank"] for r in records if r["project"] == project]
+        assert ranks == list(range(1, len(ranks) + 1))
+
+
+def test_wikipedia_covers_both_languages(load_fixture):
+    records = wikipedia.normalize(load_fixture("wikipedia_top"), DT)
+    assert {r["project"] for r in records} == {"ko.wikipedia", "en.wikipedia"}
+
+
+def test_earthquakes_reads_geojson_coordinate_order(load_fixture):
+    # GeoJSON is [longitude, latitude, depth]; swapping them puts Korea in the
+    # Pacific and nothing would flag it.
+    records = earthquakes.normalize(load_fixture("earthquakes"), DT)
+
+    assert records
+    for quake in records:
+        assert -90 <= quake["latitude"] <= 90
+        assert -180 <= quake["longitude"] <= 180
+        assert quake["occurred_at"].endswith("Z")
+
+
+def test_weather_covers_every_configured_city(load_fixture):
+    records = weather.normalize(load_fixture("city_weather"), DT)
+
+    assert {r["city"] for r in records} == set(weather.CITIES)
+    for row in records:
+        assert row["temp_min_c"] <= row["temp_max_c"]
+
+
+def test_geeknews_strips_markup_from_the_summary(load_fixture, fixture_meta):
+    dt = fixture_meta("geeknews")["dt"]
+
+    records = geeknews.normalize(load_fixture("geeknews"), dt)
+
+    assert records
+    for post in records:
+        GeekNewsPost.model_validate({**post, "collected_at": STAMP})
+        assert "<" not in (post["summary"] or "")
+        assert post["topic_id"].isdigit()
+
+
+def test_geeknews_keeps_only_the_partition_day(load_fixture, fixture_meta):
+    # The window spans about forty hours, so it always holds other days.
+    dt = fixture_meta("geeknews")["dt"]
+
+    assert geeknews.normalize(load_fixture("geeknews"), "2020-01-01") == []
+    assert geeknews.normalize(load_fixture("geeknews"), dt) != []
+
+
+def test_geeknews_stores_no_article_body(load_fixture, fixture_meta):
+    dt = fixture_meta("geeknews")["dt"]
+    records = geeknews.normalize(load_fixture("geeknews"), dt)
+
+    assert set(records[0]) == set(GeekNewsPost.model_fields) - {"collected_at"}

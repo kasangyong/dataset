@@ -1,0 +1,88 @@
+{
+  "ko.wikipedia": {
+    "items": [
+      {
+        "project": "ko.wikipedia",
+        "access": "all-access",
+        "year": "2026",
+        "month": "08",
+        "day": "24",
+        "articles": [
+          {
+            "article": "위키백과:대문",
+            "views": 77888,
+            "rank": 1
+          },
+          {
+            "article": "문화방송",
+            "views": 14870,
+            "rank": 2
+          },
+          {
+            "article": "한국방송공사",
+            "views": 11445,
+            "rank": 3
+          },
+          {
+            "article": "특수:검색",
+            "views": 9750,
+            "rank": 4
+          },
+          {
+            "article": "박위_(유튜버)",
+            "views": 7652,
+            "rank": 5
+          },
+          {
+            "article": "경장_(계급)",
+            "views": 7271,
+            "rank": 6
+          }
+        ]
+      }
+    ]
+  },
+  "en.wikipedia": {
+    "items": [
+      {
+        "project": "en.wikipedia",
+        "access": "all-access",
+        "year": "2026",
+        "month": "08",
+        "day": "24",
+        "articles": [
+          {
+            "article": "Main_Page",
+            "views": 6867940,
+            "rank": 1
+          },
+          {
+            "article": "Special:Search",
+            "views": 846147,
+            "rank": 2
+          },
+          {
+            "article": "Wikipedia:Featured_pictures",
+            "views": 681050,
+            "rank": 3
+          },
+          {
+            "article": "Shelley_Fabares",
+            "views": 465529,
+            "rank": 4
+          },
+          {
+            "article": "Enes_Kanter_Freedom",
+            "views": 255439,
+            "rank": 5
+          },
+          {
+            "article": "Jed_York",
+            "views": 227246,
+            "rank": 6
+          }
+        ]
+      }
+    ]
+  }
+}

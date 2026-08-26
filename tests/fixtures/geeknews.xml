@@ -1,0 +1,56 @@
+<ns0:feed xmlns:ns0="http://www.w3.org/2005/Atom">
+<ns0:title>GeekNews - 개발/기술/스타트업 뉴스 서비스</ns0:title>
+<ns0:subtitle>개발 뉴스, 기술 관련 새소식, 스타트업 정보와 노하우, 세상의 재미난 것들을 좋아하는 사람들을 위한 뉴스 사이트. 이메일 뉴스레터/X(Twitter)/Slack용 봇으로 구독 가능</ns0:subtitle>
+<ns0:link rel="alternate" type="text/html" href="https://news.hada.io" />
+<ns0:link rel="self" type="application/atom+xml" href="https://news.hada.io/rss/news" />
+<ns0:id>https://news.hada.io/rss/news</ns0:id>
+<ns0:author>
+<ns0:name>GeekNews</ns0:name>
+<ns0:email>news@hada.io</ns0:email>
+<ns0:uri>https://news.hada.io</ns0:uri>
+</ns0:author>
+<ns0:updated>2026-08-26T14:31:33+09:00</ns0:updated>
+<ns0:icon>https://social.news.hada.io/favicon.png</ns0:icon>
+<ns0:logo>https://social.news.hada.io/WideLogo500.png</ns0:logo>
+<ns0:category term="technology" />
+<ns0:entry>
+  <ns0:title>FDA, 케톤과 혈당 수치를 모두 모니터링하는 최초의 웨어러블 기기 승인</ns0:title>
+  <ns0:link rel="alternate" type="text/html" href="https://news.hada.io/topic?id=32899" />
+  <ns0:id>https://news.hada.io/topic?id=32899</ns0:id>
+  <ns0:updated>2026-08-26T14:31:33+09:00</ns0:updated>
+  <ns0:published>2026-08-26T14:31:33+09:00</ns0:published>
+  <ns0:author>
+    <ns0:name>neo</ns0:name>
+    <ns0:uri>https://news.hada.io/user/neo</ns0:uri>
+  </ns0:author>
+  <ns0:content type="html" xml:lang="ko">&lt;ul&gt;
+&lt;li&gt;미국 FDA가 2세 이상 당뇨병 환자를 위한 &lt;strong&gt;Libre Duo 10 Day&lt;/strong&gt;을 승인, 미국 최초의 연속 케톤 측정 웨어러블이자 하나의 기기에서 케톤과 혈당을 함께 연속 측정하는 세계 최초 제품&lt;/li&gt;
+&lt;li&gt;기존 케톤 검사는 특정 시점의 수치만 확인할 수 있었지만 Libre Duo 10 Day는 피부 바로 아래 체액에...&lt;/p&gt;</ns0:content>
+</ns0:entry><ns0:entry>
+  <ns0:title>SiFive의 첫 서버 플랫폼 BigSky SF-2U870</ns0:title>
+  <ns0:link rel="alternate" type="text/html" href="https://news.hada.io/topic?id=32898" />
+  <ns0:id>https://news.hada.io/topic?id=32898</ns0:id>
+  <ns0:updated>2026-08-26T12:26:24+09:00</ns0:updated>
+  <ns0:published>2026-08-26T12:26:24+09:00</ns0:published>
+  <ns0:author>
+    <ns0:name>xguru</ns0:name>
+    <ns0:uri>https://news.hada.io/user/xguru</ns0:uri>
+  </ns0:author>
+  <ns0:content type="html" xml:lang="ko">&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;BigSky SF-2U870&lt;/strong&gt;은 32개 P870-D 코어와 DDR5, PCIe 5.0을 갖춘 2U RISC-V 서버로, 별도의 시스템 조정 없이 소프트웨어 개발과 CI를 수행하는 데 초점을 맞춤&lt;/li&gt;
+&lt;li&gt;코어 수나 대역폭보다 중요한 변화는 &lt;strong&gt;RVA23 지원&lt;/strong&gt;으로, RISC-V 벡터 확장 RVV와 Ubuntu 26.04를 별도 호환...&lt;/p&gt;</ns0:content>
+</ns0:entry><ns0:entry>
+  <ns0:title>Hacker News 콘텐츠의 절반은 AI일까?</ns0:title>
+  <ns0:link rel="alternate" type="text/html" href="https://news.hada.io/topic?id=32897" />
+  <ns0:id>https://news.hada.io/topic?id=32897</ns0:id>
+  <ns0:updated>2026-08-26T11:56:38+09:00</ns0:updated>
+  <ns0:published>2026-08-26T11:56:38+09:00</ns0:published>
+  <ns0:author>
+    <ns0:name>xguru</ns0:name>
+    <ns0:uri>https://news.hada.io/user/xguru</ns0:uri>
+  </ns0:author>
+  <ns0:content type="html" xml:lang="ko">&lt;ul&gt;
+&lt;li&gt;2026년 2월과 6월의 일일 상위 5개 글을 조사한 결과, &lt;strong&gt;AI 관련 또는 AI 생성 콘텐츠&lt;/strong&gt; 비중이 40%에서 약 50%로 늘어남&lt;/li&gt;
+&lt;li&gt;6월 전반에는 이 비중이 약 &lt;strong&gt;60%&lt;/strong&gt; 까지 올랐지만, 월말에는 약 50%로 낮아짐&lt;/li&gt;
+&lt;li&gt;AI 기업 발표와 기술 논평은 순수 AI 콘텐츠로, Instagram A...&lt;/p&gt;</ns0:content>
+</ns0:entry></ns0:feed>

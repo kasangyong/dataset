@@ -160,6 +160,10 @@ sangyong_datasets/
 | 달러 환율 | `fx_rates` | Frankfurter (ECB) | 1 | 가능 | 일 |
 | 깃허브 신규 저장소 | `github_repos` | GitHub Search API | 1 | 가능 | 일 |
 | 해커뉴스 인기글 | `hn_stories` | HN Algolia | 1 | 가능 | 일 |
+| 위키백과 인기문서 | `wikipedia_top` | Wikimedia REST | 1 | 가능 | 일 |
+| 지진 관측 | `earthquakes` | USGS FDSN | 1 | 가능 | 일 |
+| 도시 날씨 | `city_weather` | Open-Meteo archive | 1 | 가능 | 일 |
+| GeekNews 개발뉴스 | `geeknews` | news.hada.io Atom | 0 | 불가 | 시간 |
 | arXiv 신규 논문 | `arxiv_papers` | arXiv Atom API | 1 | 가능 | 일 |
 | 임상시험 신규 등록 | `clinical_trials` | ClinicalTrials.gov API v2 | 2 | 가능 | 일 |
 | 암호화폐 시세 | `crypto_markets` | CoinGecko | 0 | 불가 | 일 |
@@ -181,7 +185,49 @@ ECB는 영업일당 하나의 환율을 발표하므로 시각 경계가 없다.
 `hn.algolia.com/api/v1/search`, `created_at_i` 를 KST 자정 epoch 범위로 필터. 상위 100건.
 본문은 저장하지 않는다.
 
-### 6.4 arxiv_papers
+### 6.4 wikipedia_top
+
+`wikimedia.org/api/rest_v1/metrics/pageviews/top/{project}/all-access/{y}/{m}/{d}`,
+한국어·영어 각각. 프로젝트당 상위 500건.
+
+대문·특수문서·프로젝트 문서는 제외한다. 한국어 상위 987건 중 8건이 그런 문서인데,
+`위키백과:대문` 하나가 실제 1위 문서의 5배를 넘어 순위를 무의미하게 만든다.
+제외 후 순위는 1부터 다시 매겨 연속성을 유지한다.
+
+상위 500 로 자르는 이유는 500위 조회수가 173회, 마지막 979위가 114회로 꼬리가 얇기 때문이다.
+잘라낸 사실은 로그에 남긴다.
+
+한국어 위키는 뉴스 소스와 같은 `dt` 를 공유하므로, "보도된 것"과 "실제로 찾아본 것"을
+같은 날짜로 대조할 수 있다.
+
+### 6.5 earthquakes
+
+`earthquake.usgs.gov/fdsnws/event/1/query`, GeoJSON, 규모 2.5 이상, KST 하루 경계.
+실측 58건/일.
+
+**좌표가 붙은 유일한 소스다.** 나머지는 시계열 아니면 문서인데, 이 소스는 사건이다.
+GeoJSON 좌표 순서가 `[경도, 위도, 깊이]` 라 바꿔 읽으면 조용히 틀린다 — 테스트로 고정한다.
+
+규모 2.5 하한은 그 아래가 관측망이 촘촘한 지역에 쏠려 지진 활동보다 센서 배치를 반영하기 때문이다.
+
+### 6.6 city_weather
+
+`archive-api.open-meteo.com/v1/archive`, 국내 8개 도시(서울·부산·인천·대구·대전·광주·울산·제주).
+도시당 1행, 8행/일. 엔드포인트가 좌표 하나만 받으므로 도시마다 요청한다.
+
+아카이브는 재분석 자료라 한 번 게시되면 값이 바뀌지 않는다. 따라서 백필한 날과 당일 수집한 날이
+같은 값을 갖는다 — `crypto_markets` 와 정반대 성질이다.
+
+### 6.7 geeknews
+
+`news.hada.io/rss/news`, Atom. 제목·링크·피드 요약만 저장하고 본문은 저장하지 않는다.
+요약은 HTML 불릿이라 태그를 제거해 평문으로 보관한다.
+
+피드가 50건을 담고 실측 약 40.9시간을 커버한다. 하루 한 번으로도 지금은 충분하지만
+**창의 크기가 시간이 아니라 건수**여서 게시량이 늘면 창이 짧아진다. 매시간 병합하면
+그 의존이 사라진다. `yna_news` 와 같은 이유, 다른 근거다.
+
+### 6.8 arxiv_papers
 
 `export.arxiv.org/api/query`, cs.AI / cs.LG / cs.CL, 제출일 KST 범위. Atom XML.
 100건씩 페이징하며 arXiv 요청 간격 권고(3초)를 지킨다. 상한 800건은 폭주 방지용이고
@@ -190,7 +236,7 @@ ECB는 영업일당 하나의 환율을 발표하므로 시각 경계가 없다.
 **초록을 저장한다.** arXiv 가 바로 그 용도로 배포하므로 뉴스 본문과 달리 라이선스 문제가 없다.
 대신 용량이 크다: 실측 약 450KB/일로 전체의 85%를 차지하며 연 165MB 규모다.
 
-### 6.5 clinical_trials
+### 6.9 clinical_trials
 
 `clinicaltrials.gov/api/v2/studies`, `AREA[StudyFirstPostDate]RANGE[dt,dt]`.
 토큰 기반 페이징으로 그날 등록분을 모두 읽는다. 실측 214건/일, 2페이지.
@@ -211,13 +257,13 @@ ECB는 영업일당 하나의 환율을 발표하므로 시각 경계가 없다.
 
 실측 약 429KB/일(평일), 연 153MB.
 
-### 6.6 crypto_markets
+### 6.10 crypto_markets
 
 `api.coingecko.com/api/v3/coins/markets`, 시총 상위 100.
 **일별 종가가 아니라 현재 시세다.** `last_updated` 가 수 분 전을 가리킨다.
 따라서 `lag_days=0`, `backfillable=False`.
 
-### 6.7 yna_news
+### 6.11 yna_news
 
 연합뉴스 RSS. 제목·요약(리드)·링크만 저장하고 본문은 저장하지 않는다.
 
@@ -228,7 +274,7 @@ ECB는 영업일당 하나의 환율을 발표하므로 시각 경계가 없다.
 병합 소스는 raw 도 읽기마다 따로 남긴다(`raw/<source>/dt=<날짜>/<타임스탬프>.json.gz`).
 덮어쓰면 마지막 읽기만 복원 가능해져 raw 를 두는 이유가 사라진다.
 
-### 6.8 진행 중인 날의 파티션
+### 6.12 진행 중인 날의 파티션
 
 Dagster 의 `DailyPartitionsDefinition` 은 끝나지 않은 날을 유효한 파티션으로 보지 않는다.
 `lag_days=0` 소스는 정의상 오늘 파티션이 필요하므로 `end_offset=1` 을 준 별도 정의

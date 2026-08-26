@@ -15,9 +15,13 @@ from pipeline.sources import (
     arxiv,
     clinical_trials,
     crypto,
+    earthquakes,
     fx,
+    geeknews,
     github_repos,
     hackernews,
+    weather,
+    wikipedia,
     yna_news,
 )
 
@@ -49,6 +53,9 @@ SOURCES = [
     Source("fx_rates", "달러 환율", fx.fx_rates),
     Source("github_repos", "깃허브 신규 저장소", github_repos.github_repos),
     Source("hn_stories", "해커뉴스 인기글", hackernews.hn_stories),
+    Source("wikipedia_top", "위키백과 인기문서", wikipedia.wikipedia_top),
+    Source("earthquakes", "지진 관측", earthquakes.earthquakes),
+    Source("city_weather", "도시 날씨", weather.city_weather),
     Source("arxiv_papers", "arXiv 신규 논문", arxiv.arxiv_papers),
     # The registry posts by US Eastern date, which is still in progress when the
     # daily run fires. Two days back is the first complete one.
@@ -58,6 +65,11 @@ SOURCES = [
            lag_days=0, backfillable=False),
     Source("yna_news", "연합뉴스 헤드라인", yna_news.yna_news,
            lag_days=0, backfillable=False, merge_key="guid", hourly=True),
+    # The feed holds fifty entries over roughly forty hours. That covers a day
+    # today, but the window is a count not a duration -- a busy stretch would
+    # shorten it. Hourly merging does not depend on posting volume.
+    Source("geeknews", "GeekNews 개발뉴스", geeknews.geeknews,
+           lag_days=0, backfillable=False, merge_key="topic_id", hourly=True),
 ]
 
 BY_NAME = {s.name: s for s in SOURCES}
