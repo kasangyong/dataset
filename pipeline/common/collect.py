@@ -8,6 +8,7 @@ function plus a normalize function -- nothing else.
 from __future__ import annotations
 
 import time
+from datetime import datetime, timezone
 from typing import Any, Callable
 
 from dagster import AssetExecutionContext, MaterializeResult, MetadataValue
@@ -47,6 +48,9 @@ def collect(
 
     try:
         payload = fetch(dt)
+        # Stamped here rather than after normalization: this is the instant the
+        # counts in the payload were true.
+        collected_at = datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
         bytes_raw = storage.write_raw(source, dt, payload)
 
         candidates = normalize(payload, dt)
@@ -57,7 +61,8 @@ def collect(
         invalid = 0
         for candidate in candidates:
             try:
-                valid.append(model.model_validate(candidate).model_dump())
+                stamped = {**candidate, "collected_at": collected_at}
+                valid.append(model.model_validate(stamped).model_dump())
             except ValidationError as exc:
                 invalid += 1
                 if invalid <= 3:  # log a few examples, not thousands

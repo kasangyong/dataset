@@ -1,29 +1,29 @@
-{"base": "USD", "dt": "2026-08-21", "is_stale": false, "quote": "AUD", "rate": 1.3951, "rate_date": "2026-08-21"}
-{"base": "USD", "dt": "2026-08-21", "is_stale": false, "quote": "BRL", "rate": 5.1729, "rate_date": "2026-08-21"}
-{"base": "USD", "dt": "2026-08-21", "is_stale": false, "quote": "CAD", "rate": 1.374, "rate_date": "2026-08-21"}
-{"base": "USD", "dt": "2026-08-21", "is_stale": false, "quote": "CHF", "rate": 0.79947, "rate_date": "2026-08-21"}
-{"base": "USD", "dt": "2026-08-21", "is_stale": false, "quote": "CNY", "rate": 6.7206, "rate_date": "2026-08-21"}
-{"base": "USD", "dt": "2026-08-21", "is_stale": false, "quote": "CZK", "rate": 20.614, "rate_date": "2026-08-21"}
-{"base": "USD", "dt": "2026-08-21", "is_stale": false, "quote": "DKK", "rate": 6.3901, "rate_date": "2026-08-21"}
-{"base": "USD", "dt": "2026-08-21", "is_stale": false, "quote": "EUR", "rate": 0.85477, "rate_date": "2026-08-21"}
-{"base": "USD", "dt": "2026-08-21", "is_stale": false, "quote": "GBP", "rate": 0.73228, "rate_date": "2026-08-21"}
-{"base": "USD", "dt": "2026-08-21", "is_stale": false, "quote": "HKD", "rate": 7.8405, "rate_date": "2026-08-21"}
-{"base": "USD", "dt": "2026-08-21", "is_stale": false, "quote": "HUF", "rate": 310.09, "rate_date": "2026-08-21"}
-{"base": "USD", "dt": "2026-08-21", "is_stale": false, "quote": "IDR", "rate": 17659.0, "rate_date": "2026-08-21"}
-{"base": "USD", "dt": "2026-08-21", "is_stale": false, "quote": "ILS", "rate": 2.9846, "rate_date": "2026-08-21"}
-{"base": "USD", "dt": "2026-08-21", "is_stale": false, "quote": "INR", "rate": 95.7, "rate_date": "2026-08-21"}
-{"base": "USD", "dt": "2026-08-21", "is_stale": false, "quote": "ISK", "rate": 121.04, "rate_date": "2026-08-21"}
-{"base": "USD", "dt": "2026-08-21", "is_stale": false, "quote": "JPY", "rate": 158.7, "rate_date": "2026-08-21"}
-{"base": "USD", "dt": "2026-08-21", "is_stale": false, "quote": "KRW", "rate": 1384.23, "rate_date": "2026-08-21"}
-{"base": "USD", "dt": "2026-08-21", "is_stale": false, "quote": "MXN", "rate": 16.898, "rate_date": "2026-08-21"}
-{"base": "USD", "dt": "2026-08-21", "is_stale": false, "quote": "MYR", "rate": 4.0385, "rate_date": "2026-08-21"}
-{"base": "USD", "dt": "2026-08-21", "is_stale": false, "quote": "NOK", "rate": 9.2893, "rate_date": "2026-08-21"}
-{"base": "USD", "dt": "2026-08-21", "is_stale": false, "quote": "NZD", "rate": 1.6703, "rate_date": "2026-08-21"}
-{"base": "USD", "dt": "2026-08-21", "is_stale": false, "quote": "PHP", "rate": 61.66, "rate_date": "2026-08-21"}
-{"base": "USD", "dt": "2026-08-21", "is_stale": false, "quote": "PLN", "rate": 3.6822, "rate_date": "2026-08-21"}
-{"base": "USD", "dt": "2026-08-21", "is_stale": false, "quote": "RON", "rate": 4.4929, "rate_date": "2026-08-21"}
-{"base": "USD", "dt": "2026-08-21", "is_stale": false, "quote": "SEK", "rate": 9.4559, "rate_date": "2026-08-21"}
-{"base": "USD", "dt": "2026-08-21", "is_stale": false, "quote": "SGD", "rate": 1.2683, "rate_date": "2026-08-21"}
-{"base": "USD", "dt": "2026-08-21", "is_stale": false, "quote": "THB", "rate": 32.675, "rate_date": "2026-08-21"}
-{"base": "USD", "dt": "2026-08-21", "is_stale": false, "quote": "TRY", "rate": 48.066, "rate_date": "2026-08-21"}
-{"base": "USD", "dt": "2026-08-21", "is_stale": false, "quote": "ZAR", "rate": 16.0044, "rate_date": "2026-08-21"}
+{"base": "USD", "collected_at": "2026-08-26T03:45:21Z", "dt": "2026-08-21", "is_stale": false, "quote": "AUD", "rate": 1.3951, "rate_date": "2026-08-21"}
+{"base": "USD", "collected_at": "2026-08-26T03:45:21Z", "dt": "2026-08-21", "is_stale": false, "quote": "BRL", "rate": 5.1729, "rate_date": "2026-08-21"}
+{"base": "USD", "collected_at": "2026-08-26T03:45:21Z", "dt": "2026-08-21", "is_stale": false, "quote": "CAD", "rate": 1.374, "rate_date": "2026-08-21"}
+{"base": "USD", "collected_at": "2026-08-26T03:45:21Z", "dt": "2026-08-21", "is_stale": false, "quote": "CHF", "rate": 0.79947, "rate_date": "2026-08-21"}
+{"base": "USD", "collected_at": "2026-08-26T03:45:21Z", "dt": "2026-08-21", "is_stale": false, "quote": "CNY", "rate": 6.7206, "rate_date": "2026-08-21"}
+{"base": "USD", "collected_at": "2026-08-26T03:45:21Z", "dt": "2026-08-21", "is_stale": false, "quote": "CZK", "rate": 20.614, "rate_date": "2026-08-21"}
+{"base": "USD", "collected_at": "2026-08-26T03:45:21Z", "dt": "2026-08-21", "is_stale": false, "quote": "DKK", "rate": 6.3901, "rate_date": "2026-08-21"}
+{"base": "USD", "collected_at": "2026-08-26T03:45:21Z", "dt": "2026-08-21", "is_stale": false, "quote": "EUR", "rate": 0.85477, "rate_date": "2026-08-21"}
+{"base": "USD", "collected_at": "2026-08-26T03:45:21Z", "dt": "2026-08-21", "is_stale": false, "quote": "GBP", "rate": 0.73228, "rate_date": "2026-08-21"}
+{"base": "USD", "collected_at": "2026-08-26T03:45:21Z", "dt": "2026-08-21", "is_stale": false, "quote": "HKD", "rate": 7.8405, "rate_date": "2026-08-21"}
+{"base": "USD", "collected_at": "2026-08-26T03:45:21Z", "dt": "2026-08-21", "is_stale": false, "quote": "HUF", "rate": 310.09, "rate_date": "2026-08-21"}
+{"base": "USD", "collected_at": "2026-08-26T03:45:21Z", "dt": "2026-08-21", "is_stale": false, "quote": "IDR", "rate": 17659.0, "rate_date": "2026-08-21"}
+{"base": "USD", "collected_at": "2026-08-26T03:45:21Z", "dt": "2026-08-21", "is_stale": false, "quote": "ILS", "rate": 2.9846, "rate_date": "2026-08-21"}
+{"base": "USD", "collected_at": "2026-08-26T03:45:21Z", "dt": "2026-08-21", "is_stale": false, "quote": "INR", "rate": 95.7, "rate_date": "2026-08-21"}
+{"base": "USD", "collected_at": "2026-08-26T03:45:21Z", "dt": "2026-08-21", "is_stale": false, "quote": "ISK", "rate": 121.04, "rate_date": "2026-08-21"}
+{"base": "USD", "collected_at": "2026-08-26T03:45:21Z", "dt": "2026-08-21", "is_stale": false, "quote": "JPY", "rate": 158.7, "rate_date": "2026-08-21"}
+{"base": "USD", "collected_at": "2026-08-26T03:45:21Z", "dt": "2026-08-21", "is_stale": false, "quote": "KRW", "rate": 1384.23, "rate_date": "2026-08-21"}
+{"base": "USD", "collected_at": "2026-08-26T03:45:21Z", "dt": "2026-08-21", "is_stale": false, "quote": "MXN", "rate": 16.898, "rate_date": "2026-08-21"}
+{"base": "USD", "collected_at": "2026-08-26T03:45:21Z", "dt": "2026-08-21", "is_stale": false, "quote": "MYR", "rate": 4.0385, "rate_date": "2026-08-21"}
+{"base": "USD", "collected_at": "2026-08-26T03:45:21Z", "dt": "2026-08-21", "is_stale": false, "quote": "NOK", "rate": 9.2893, "rate_date": "2026-08-21"}
+{"base": "USD", "collected_at": "2026-08-26T03:45:21Z", "dt": "2026-08-21", "is_stale": false, "quote": "NZD", "rate": 1.6703, "rate_date": "2026-08-21"}
+{"base": "USD", "collected_at": "2026-08-26T03:45:21Z", "dt": "2026-08-21", "is_stale": false, "quote": "PHP", "rate": 61.66, "rate_date": "2026-08-21"}
+{"base": "USD", "collected_at": "2026-08-26T03:45:21Z", "dt": "2026-08-21", "is_stale": false, "quote": "PLN", "rate": 3.6822, "rate_date": "2026-08-21"}
+{"base": "USD", "collected_at": "2026-08-26T03:45:21Z", "dt": "2026-08-21", "is_stale": false, "quote": "RON", "rate": 4.4929, "rate_date": "2026-08-21"}
+{"base": "USD", "collected_at": "2026-08-26T03:45:21Z", "dt": "2026-08-21", "is_stale": false, "quote": "SEK", "rate": 9.4559, "rate_date": "2026-08-21"}
+{"base": "USD", "collected_at": "2026-08-26T03:45:21Z", "dt": "2026-08-21", "is_stale": false, "quote": "SGD", "rate": 1.2683, "rate_date": "2026-08-21"}
+{"base": "USD", "collected_at": "2026-08-26T03:45:21Z", "dt": "2026-08-21", "is_stale": false, "quote": "THB", "rate": 32.675, "rate_date": "2026-08-21"}
+{"base": "USD", "collected_at": "2026-08-26T03:45:21Z", "dt": "2026-08-21", "is_stale": false, "quote": "TRY", "rate": 48.066, "rate_date": "2026-08-21"}
+{"base": "USD", "collected_at": "2026-08-26T03:45:21Z", "dt": "2026-08-21", "is_stale": false, "quote": "ZAR", "rate": 16.0044, "rate_date": "2026-08-21"}

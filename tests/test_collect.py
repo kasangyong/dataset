@@ -138,3 +138,37 @@ def test_records_carry_the_partition_they_were_collected_for():
 
     rows = storage.read_curated(SOURCE, "2026-08-24")
     assert all(row["dt"] == "2026-08-24" for row in rows)
+
+
+def test_every_stored_record_carries_its_observation_time():
+    run()
+
+    rows = storage.read_curated(SOURCE, DT)
+    assert all(row["collected_at"].endswith("Z") for row in rows)
+    # One read of the source is one observation, so the whole batch shares it.
+    assert len({row["collected_at"] for row in rows}) == 1
+
+
+def test_observation_time_is_the_read_not_the_partition():
+    # A backfilled day is measured today, not on the day it labels. Conflating
+    # the two is what makes stars and points incomparable across partitions.
+    run(dt="2026-08-01")
+
+    row = storage.read_curated(SOURCE, "2026-08-01")[0]
+    assert row["dt"] == "2026-08-01"
+    assert row["collected_at"] > "2026-08-01T00:00:00Z"
+
+
+def test_normalizers_do_not_supply_the_stamp():
+    # If a normalizer set it, every new source would have to remember to.
+    captured = {}
+
+    def capture(payload, dt):
+        records = make_records(payload, dt)
+        captured["keys"] = set(records[0])
+        return records
+
+    run(normalize=capture)
+
+    assert "collected_at" not in captured["keys"]
+    assert "collected_at" in storage.read_curated(SOURCE, DT)[0]

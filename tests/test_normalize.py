@@ -7,6 +7,10 @@ from pipeline.common.schema import FxRate, GithubRepo, HnStory
 from pipeline.sources import fx, github_repos, hackernews
 from tests.conftest import DT
 
+# Normalizers do not stamp observation time -- the collector does. Tests that
+# validate normalizer output supply it the way the collector would.
+STAMP = "2026-08-26T03:04:44Z"
+
 CASES = [
     (fx, FxRate, "fx_rates"),
     (github_repos, GithubRepo, "github_repos"),
@@ -20,7 +24,7 @@ def test_normalize_produces_valid_records(module, model, fixture_name, load_fixt
 
     assert records, "fixture should yield at least one record"
     for record in records:
-        model.model_validate(record)  # raises on drift
+        model.model_validate({**record, "collected_at": STAMP})  # raises on drift
         assert record["dt"] == DT
 
 
@@ -53,13 +57,13 @@ def test_hn_keeps_text_posts_without_url(load_fixture):
     records = hackernews.normalize(payload, DT)
 
     assert records[0]["url"] is None
-    HnStory.model_validate(records[0])
+    HnStory.model_validate({**records[0], "collected_at": STAMP})
 
 
 def test_hn_stores_no_article_body(load_fixture):
     records = hackernews.normalize(load_fixture("hn_stories"), DT)
     assert "story_text" not in records[0]
-    assert set(records[0]) == set(HnStory.model_fields)
+    assert set(records[0]) == set(HnStory.model_fields) - {"collected_at"}
 
 
 def test_schema_rejects_unknown_field():
@@ -74,6 +78,7 @@ def test_schema_rejects_unknown_field():
                 "points": 1,
                 "num_comments": 0,
                 "created_at": "2026-08-25T00:00:00Z",
+                "collected_at": STAMP,
                 "surprise": "new upstream field",
             }
         )
@@ -89,6 +94,7 @@ def test_schema_rejects_wrong_type():
                 "rate": "not-a-number",
                 "rate_date": DT,
                 "is_stale": False,
+                "collected_at": STAMP,
             }
         )
 

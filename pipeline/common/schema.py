@@ -17,6 +17,12 @@ class Record(BaseModel):
 
     dt: str  # partition date, YYYY-MM-DD
 
+    # When the source was actually read, in UTC. Counts like stars and points
+    # are measured once, at this moment -- so without it a value is not
+    # interpretable: 360 points after 6 hours and after 5 days are different
+    # facts. Stamped by the collector, not by normalizers.
+    collected_at: str
+
 
 class FxRate(Record):
     base: str
