@@ -8,6 +8,7 @@ from pipeline.common.schema import (
     CityWeather,
     ClinicalTrial,
     Earthquake,
+    FactCheck,
     GeekNewsPost,
     CryptoMarket,
     FxRate,
@@ -20,6 +21,7 @@ from pipeline.sources import (
     arxiv,
     clinical_trials,
     crypto,
+    fact_checks,
     earthquakes,
     fx,
     geeknews,
@@ -317,3 +319,63 @@ def test_geeknews_stores_no_article_body(load_fixture, fixture_meta):
     records = geeknews.normalize(load_fixture("geeknews"), dt)
 
     assert set(records[0]) == set(GeekNewsPost.model_fields) - {"collected_at"}
+
+
+def test_fact_checks_carries_the_verdict_where_published(load_fixture, fixture_meta):
+    # The verdict is the point of the dataset; the feeds alone do not have it.
+    dt = fixture_meta("fact_checks")["dt"]
+
+    records = fact_checks.normalize(load_fixture("fact_checks"), dt)
+
+    assert records
+    for r in records:
+        FactCheck.model_validate({**r, "collected_at": STAMP})
+        assert r["dt"] == dt
+    rated = [r for r in records if r["rating"]]
+    assert rated, "no verdict survived the ClaimReview extraction"
+    assert all(r["claim_reviewed"] for r in rated)
+
+
+def test_fact_checks_leaves_the_rating_empty_rather_than_guessing(load_fixture, fixture_meta):
+    # FactCheck.org publishes no ClaimReview markup. An absent verdict must
+    # read as absent, not as a default.
+    dt = fixture_meta("fact_checks")["dt"]
+
+    records = fact_checks.normalize(load_fixture("fact_checks"), dt)
+
+    unmarked = [r for r in records if r["publisher"] == "factcheck.org"]
+    assert unmarked
+    assert all(r["rating"] is None for r in unmarked)
+
+
+def test_fact_checks_keeps_only_the_partition_day(load_fixture, fixture_meta):
+    # The window is about eleven days, so other days are always present.
+    dt = fixture_meta("fact_checks")["dt"]
+
+    assert fact_checks.normalize(load_fixture("fact_checks"), "2020-01-01") == []
+    assert fact_checks.normalize(load_fixture("fact_checks"), dt) != []
+
+
+def test_fact_checks_names_both_publishers(load_fixture, fixture_meta):
+    dt = fixture_meta("fact_checks")["dt"]
+    records = fact_checks.normalize(load_fixture("fact_checks"), dt)
+
+    assert {r["publisher"] for r in records} == set(fact_checks.FEEDS)
+
+
+def test_claim_review_extraction_ignores_other_structured_data():
+    # Article pages carry several ld+json blocks; only ClaimReview is a verdict.
+    page = (
+        '<script type="application/ld+json">{"@type":"WebPage","name":"x"}</script>'
+        '<script type="application/ld+json">'
+        '{"@type":"ClaimReview","claimReviewed":"c","reviewRating":{"alternateName":"False"}}'
+        "</script>"
+    )
+    node = fact_checks._extract_claim_review(page)
+
+    assert node["reviewRating"]["alternateName"] == "False"
+
+
+def test_claim_review_extraction_survives_malformed_json():
+    page = '<script type="application/ld+json">{not json}</script>'
+    assert fact_checks._extract_claim_review(page) is None

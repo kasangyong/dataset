@@ -154,3 +154,17 @@ class GeekNewsPost(Record):
     url: str
     summary: str | None  # the feed's bullet lede, not the article
     published: str
+
+
+class FactCheck(Record):
+    publisher: str
+    guid: str
+    title: str
+    url: str
+    author: str | None
+    topics: list[str]
+    published: str
+    # From the article's ClaimReview markup. Snopes publishes it; FactCheck.org
+    # does not, so these are empty for that publisher rather than absent.
+    claim_reviewed: str | None
+    rating: str | None

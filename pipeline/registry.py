@@ -14,6 +14,7 @@ from dagster import AssetsDefinition
 from pipeline.sources import (
     arxiv,
     clinical_trials,
+    fact_checks,
     crypto,
     earthquakes,
     fx,
@@ -59,6 +60,11 @@ SOURCES = [
     Source("wikipedia_top", "위키백과 인기문서", wikipedia.wikipedia_top, lag_days=2),
     Source("earthquakes", "지진 관측", earthquakes.earthquakes),
     Source("city_weather", "도시 날씨", weather.city_weather),
+    # Merged because the feeds are a rolling eleven-day window: the same items
+    # reappear every day. The source itself refuses days older than the window
+    # rather than writing an empty partition that would read as "nothing was
+    # checked that day".
+    Source("fact_checks", "팩트체크 판정", fact_checks.fact_checks, merge_key="guid"),
     Source("arxiv_papers", "arXiv 신규 논문", arxiv.arxiv_papers),
     # The registry posts by US Eastern date, which is still in progress when the
     # daily run fires. Two days back is the first complete one.

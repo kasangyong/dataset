@@ -133,3 +133,10 @@
 {"bytes_curated": 109543, "bytes_raw": 18437, "dt": "2026-08-27", "duration_s": 1.941, "error": null, "invalid_rows": 0, "rows": 211, "run_at": "2026-08-27T02:28:23Z", "source": "yna_news", "status": "ok"}
 {"bytes_curated": 12116, "bytes_raw": 12304, "dt": "2026-08-27", "duration_s": 0.843, "error": null, "invalid_rows": 0, "rows": 21, "run_at": "2026-08-27T02:28:24Z", "source": "geeknews", "status": "ok"}
 {"bytes_curated": 146599, "bytes_raw": 30530, "dt": "2026-08-26", "duration_s": 0.74, "error": null, "invalid_rows": 0, "rows": 1000, "run_at": "2026-08-27T03:30:50Z", "source": "wikipedia_top", "status": "ok"}
+{"bytes_curated": 428, "bytes_raw": 65907, "dt": "2026-08-20", "duration_s": 3.13, "error": null, "invalid_rows": 0, "rows": 1, "run_at": "2026-08-27T04:08:51Z", "source": "fact_checks", "status": "ok"}
+{"bytes_curated": 802, "bytes_raw": 65928, "dt": "2026-08-21", "duration_s": 4.462, "error": null, "invalid_rows": 0, "rows": 2, "run_at": "2026-08-27T04:08:56Z", "source": "fact_checks", "status": "ok"}
+{"bytes_curated": 565, "bytes_raw": 65922, "dt": "2026-08-22", "duration_s": 1.896, "error": null, "invalid_rows": 0, "rows": 1, "run_at": "2026-08-27T04:08:58Z", "source": "fact_checks", "status": "ok"}
+{"bytes_curated": 0, "bytes_raw": 65881, "dt": "2026-08-23", "duration_s": 1.804, "error": null, "invalid_rows": 0, "rows": 0, "run_at": "2026-08-27T04:09:00Z", "source": "fact_checks", "status": "ok"}
+{"bytes_curated": 0, "bytes_raw": 65881, "dt": "2026-08-24", "duration_s": 1.821, "error": null, "invalid_rows": 0, "rows": 0, "run_at": "2026-08-27T04:09:03Z", "source": "fact_checks", "status": "ok"}
+{"bytes_curated": 1751, "bytes_raw": 66429, "dt": "2026-08-25", "duration_s": 4.701, "error": null, "invalid_rows": 0, "rows": 3, "run_at": "2026-08-27T04:09:08Z", "source": "fact_checks", "status": "ok"}
+{"bytes_curated": 6758, "bytes_raw": 67201, "dt": "2026-08-26", "duration_s": 13.921, "error": null, "invalid_rows": 0, "rows": 11, "run_at": "2026-08-27T04:09:23Z", "source": "fact_checks", "status": "ok"}

@@ -164,6 +164,7 @@ sangyong_datasets/
 | 지진 관측 | `earthquakes` | USGS FDSN | 1 | 가능 | 일 |
 | 도시 날씨 | `city_weather` | Open-Meteo archive | 1 | 가능 | 일 |
 | GeekNews 개발뉴스 | `geeknews` | news.hada.io Atom | 0 | 불가 | 시간 |
+| 팩트체크 판정 | `fact_checks` | Snopes·FactCheck.org RSS + ClaimReview | 1 | 11일 이내 | 일 |
 | arXiv 신규 논문 | `arxiv_papers` | arXiv Atom API | 1 | 가능 | 일 |
 | 임상시험 신규 등록 | `clinical_trials` | ClinicalTrials.gov API v2 | 2 | 가능 | 일 |
 | 암호화폐 시세 | `crypto_markets` | CoinGecko | 0 | 불가 | 일 |
@@ -279,7 +280,31 @@ GeoJSON 좌표 순서가 `[경도, 위도, 깊이]` 라 바꿔 읽으면 조용�
 병합 소스는 raw 도 읽기마다 따로 남긴다(`raw/<source>/dt=<날짜>/<타임스탬프>.json.gz`).
 덮어쓰면 마지막 읽기만 복원 가능해져 raw 를 두는 이유가 사라진다.
 
-### 6.12 진행 중인 날의 파티션
+### 6.12 fact_checks
+
+거짓 기사만 모은 피드는 존재하지 않는다. 존재하는 것은 **검증 기록**이다 — 누군가 한 주장과
+검증기관의 판정.
+
+Snopes·FactCheck.org RSS. 실측 각각 20건/275시간, 10건/286시간으로 창이 매우 넓다.
+따라서 하루 한 번으로 충분하고 스케줄러가 몇 시간 밀려도 누락이 없다. 대신 양이 적다 —
+둘 합쳐 하루 2~3건.
+
+**판정은 RSS에 없다.** 피드에는 제목·링크·주제 태그뿐이고, Snopes 카테고리를 확인하니
+`['Entertainment', 'Music', 'AI-generated Content']` 같은 주제어일 뿐 등급이 아니다.
+판정은 기사 페이지의 schema.org **ClaimReview** 마크업에 있다. 기계가 읽으라고 붙이는
+구조화 데이터이므로 그 블록만 읽어 `claim_reviewed` 와 `rating` 을 채운다. 하루 몇 건이라
+부하가 없고, 요청 사이에 1초를 둔다.
+
+Snopes는 마크업을 붙이고 FactCheck.org는 붙이지 않는다. 후자의 `rating` 은 비운다 —
+없는 판정을 기본값으로 채우면 없다는 사실이 사라진다.
+
+기사 하나를 못 읽어도 그날 전체를 잃지 않도록 개별 실패는 로그로만 남기고 계속한다.
+
+백필은 창(약 11일) 안에서만 가능하다. 그보다 오래된 날짜는 소스가 `FeedWindowError` 로
+거부한다. 빈 파티션을 쓰면 "그날 검증된 주장이 없었다"로 읽히지만 실제로는 "피드가 답할 수
+없다"이며, 둘은 다른 사실이다.
+
+### 6.13 진행 중인 날의 파티션
 
 Dagster 의 `DailyPartitionsDefinition` 은 끝나지 않은 날을 유효한 파티션으로 보지 않는다.
 `lag_days=0` 소스는 정의상 오늘 파티션이 필요하므로 `end_offset=1` 을 준 별도 정의
