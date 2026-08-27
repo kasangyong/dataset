@@ -7,8 +7,11 @@ on:
     # with no activity for 60 days -- the data commits keep that alive.
     - cron: "0 21 * * *"
     # Feed sources expose only the last hour or two, so once a day would miss
-    # almost everything. These read every hour and merge into the day.
-    - cron: "0 * * * *"
+    # almost everything. Asking every thirty minutes rather than every hour is
+    # a hedge against GitHub's scheduler: an hourly ask was delivered at
+    # 49-174 minute intervals, and the Yonhap window is about ninety, which
+    # cost us four hours of articles on 2026-08-27.
+    - cron: "*/30 * * * *"
   workflow_dispatch:
     inputs:
       group:
@@ -73,7 +76,7 @@ jobs:
         run: |
           if [ -n "$INPUT_GROUP" ]; then
             GROUP="$INPUT_GROUP"
-          elif [ "$SCHEDULE" = "0 * * * *" ]; then
+          elif [ "$SCHEDULE" = "*/30 * * * *" ]; then
             GROUP=hourly
           else
             GROUP=daily

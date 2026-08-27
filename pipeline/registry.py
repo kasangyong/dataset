@@ -53,7 +53,10 @@ SOURCES = [
     Source("fx_rates", "달러 환율", fx.fx_rates),
     Source("github_repos", "깃허브 신규 저장소", github_repos.github_repos),
     Source("hn_stories", "해커뉴스 인기글", hackernews.hn_stories),
-    Source("wikipedia_top", "위키백과 인기문서", wikipedia.wikipedia_top),
+    # Pageviews are aggregated per UTC day and published a few hours after
+    # that day closes. At 21:00 UTC the run's own UTC day has not even ended,
+    # so D-1 is never available -- measured as a 404 on the scheduled run.
+    Source("wikipedia_top", "위키백과 인기문서", wikipedia.wikipedia_top, lag_days=2),
     Source("earthquakes", "지진 관측", earthquakes.earthquakes),
     Source("city_weather", "도시 날씨", weather.city_weather),
     Source("arxiv_papers", "arXiv 신규 논문", arxiv.arxiv_papers),

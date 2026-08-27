@@ -62,3 +62,9 @@ def test_sources_with_legitimately_empty_days_say_so():
     assert yna_news.ALLOW_EMPTY is True
     # A source that always has data must not declare it.
     assert not hasattr(fx, "ALLOW_EMPTY")
+
+
+def test_wikipedia_waits_for_the_utc_day_to_publish():
+    # Pageviews aggregate per UTC day and appear a few hours after it closes.
+    # At 21:00 UTC the run's own UTC day has not ended, so D-1 returns 404.
+    assert BY_NAME["wikipedia_top"].lag_days == 2

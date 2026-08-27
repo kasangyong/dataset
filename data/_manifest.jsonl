@@ -132,3 +132,4 @@
 {"bytes_curated": 33341, "bytes_raw": 18058, "dt": "2026-08-27", "duration_s": 0.148, "error": null, "invalid_rows": 0, "rows": 100, "run_at": "2026-08-27T00:26:06Z", "source": "crypto_markets", "status": "ok"}
 {"bytes_curated": 109543, "bytes_raw": 18437, "dt": "2026-08-27", "duration_s": 1.941, "error": null, "invalid_rows": 0, "rows": 211, "run_at": "2026-08-27T02:28:23Z", "source": "yna_news", "status": "ok"}
 {"bytes_curated": 12116, "bytes_raw": 12304, "dt": "2026-08-27", "duration_s": 0.843, "error": null, "invalid_rows": 0, "rows": 21, "run_at": "2026-08-27T02:28:24Z", "source": "geeknews", "status": "ok"}
+{"bytes_curated": 146599, "bytes_raw": 30530, "dt": "2026-08-26", "duration_s": 0.74, "error": null, "invalid_rows": 0, "rows": 1000, "run_at": "2026-08-27T03:30:50Z", "source": "wikipedia_top", "status": "ok"}

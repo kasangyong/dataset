@@ -1,8 +1,15 @@
 """Most-viewed Wikipedia articles for the partition date (Wikimedia REST API).
 
 Both Korean and English are collected. The Korean side is the widest available
-read on what people here looked up on a given day, and shares its ``dt`` with
-the news sources, so the two can be compared directly.
+read on what people here looked up on a given day.
+
+Unlike the event sources, ``dt`` here means a **UTC** calendar day: the API
+aggregates per UTC day and offers no finer endpoint, so there is no KST window
+to align to. Against a KST-day source the two differ by nine hours -- close
+enough to compare trends, not close enough to join exactly.
+
+The aggregate is published a few hours after its UTC day closes, which is why
+the registry gives this source a two-day lag.
 """
 
 from typing import Any
