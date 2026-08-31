@@ -229,3 +229,5 @@
 {"bytes_curated": 0, "bytes_raw": 0, "dt": "2026-08-30", "duration_s": 0.059, "error": "EmptyPayloadError: arxiv_papers returned no records for 2026-08-30", "invalid_rows": 0, "rows": 0, "run_at": "2026-08-30T23:08:33Z", "source": "arxiv_papers", "status": "failed"}
 {"bytes_curated": 0, "bytes_raw": 88, "dt": "2026-08-29", "duration_s": 0.204, "error": null, "invalid_rows": 0, "rows": 0, "run_at": "2026-08-30T23:08:34Z", "source": "clinical_trials", "status": "ok"}
 {"bytes_curated": 33371, "bytes_raw": 18323, "dt": "2026-08-31", "duration_s": 0.14, "error": null, "invalid_rows": 0, "rows": 100, "run_at": "2026-08-30T23:08:34Z", "source": "crypto_markets", "status": "ok"}
+{"bytes_curated": 101700, "bytes_raw": 17400, "dt": "2026-08-31", "duration_s": 1.211, "error": null, "invalid_rows": 0, "rows": 202, "run_at": "2026-08-31T00:17:57Z", "source": "yna_news", "status": "ok"}
+{"bytes_curated": 7914, "bytes_raw": 12877, "dt": "2026-08-31", "duration_s": 0.761, "error": null, "invalid_rows": 0, "rows": 13, "run_at": "2026-08-31T00:17:58Z", "source": "geeknews", "status": "ok"}
