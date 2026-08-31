@@ -19,9 +19,44 @@ from datetime import date, timedelta
 
 from dagster import materialize
 
-from pipeline.common import manifest
+from pipeline.common import manifest, storage
 from pipeline.common.partitions import START_DATE, partition_for
 from pipeline.registry import BY_NAME, DAILY_SOURCES, HOURLY_SOURCES, SOURCES
+
+
+# How far back a scheduled run reaches to repair partitions it already knows
+# are missing. A transient upstream failure would otherwise leave a permanent
+# hole: each run only fills its own day and never revisits.
+HEAL_DAYS = 7
+
+
+def find_gaps(names: list[str], days: int = HEAL_DAYS) -> list[tuple[str, str]]:
+    """Recent partitions that failed or never landed.
+
+    A partition counts as present only when the manifest says it succeeded and
+    the file is there -- an empty file from a source that legitimately had no
+    records is complete, a missing one is not.
+    """
+    gaps: list[tuple[str, str]] = []
+    for name in names:
+        source = BY_NAME[name]
+        if not source.backfillable:
+            # A snapshot source cannot be repaired after the fact; retrying it
+            # would file today's numbers under a past date.
+            continue
+
+        due = date.fromisoformat(partition_for(source.lag_days))
+        for back in range(1, days + 1):  # the due day itself is the normal plan
+            dt = (due - timedelta(days=back)).isoformat()
+            if dt < START_DATE:
+                continue
+            healthy = (
+                manifest.latest_status(dt).get(name) == "ok"
+                and storage.curated_path(name, dt).exists()
+            )
+            if not healthy:
+                gaps.append((dt, name))
+    return gaps
 
 
 def date_range(start: str, end: str) -> list[str]:
@@ -69,10 +104,22 @@ def build_plan(names: list[str], start: str | None, end: str | None) -> list[tup
     return plan
 
 
-def run(plan: list[tuple[str, str]]) -> int:
-    """Materialize every planned pair. Returns a process exit code."""
+def run(plan: list[tuple[str, str]], healing: list[tuple[str, str]] | None = None) -> int:
+    """Materialize every planned pair. Returns a process exit code.
+
+    Pairs in ``healing`` are repair attempts on partitions already known to be
+    broken. They are tried on a best-effort basis and never decide the exit
+    code: a source that is down upstream would otherwise paint every run red
+    until it recovers.
+    """
     summary = ["| date | source | status |", "| --- | --- | --- |"]
     outcomes: dict[str, dict[str, bool]] = {}
+
+    for dt, name in healing or []:
+        result = materialize([BY_NAME[name].asset], partition_key=dt, raise_on_error=False)
+        verdict = "repaired" if result.success else "still failing"
+        summary.append(f"| {dt} | {name} | {verdict} |")
+        annotate("notice" if result.success else "warning", f"{name} {dt}: {verdict}")
 
     for dt, name in plan:
         # raise_on_error=False so one dead API cannot abort the rest of the
@@ -100,6 +147,11 @@ def main(argv: list[str] | None = None) -> int:
     parser.add_argument("--end", help="last partition date, inclusive")
     parser.add_argument("--sources", help="comma-separated source names; default all")
     parser.add_argument(
+        "--no-heal",
+        action="store_true",
+        help="skip repairing recent failed or missing partitions",
+    )
+    parser.add_argument(
         "--group",
         choices=["all", "daily", "hourly"],
         default="all",
@@ -120,12 +172,18 @@ def main(argv: list[str] | None = None) -> int:
         names = [s.name for s in SOURCES]
 
     plan = build_plan(names, args.start, args.end)
-    if not plan:
+    # Only a scheduled-shape run repairs history; an explicit range means the
+    # caller is choosing the partitions themselves.
+    healing = [] if (args.start or args.no_heal) else find_gaps(names)
+
+    if not plan and not healing:
         annotate("warning", "nothing to collect")
         return 0
 
     print(f"collecting {len(plan)} partition-source pair(s)")
-    code = run(plan)
+    if healing:
+        print(f"repairing {len(healing)} known-bad partition(s) from the last {HEAL_DAYS} days")
+    code = run(plan, healing)
 
     for dt in sorted({dt for dt, _ in plan}):
         print(f"{dt}: {manifest.latest_status(dt)}")
