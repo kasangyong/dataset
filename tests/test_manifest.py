@@ -49,3 +49,21 @@ def test_latest_status_ignores_other_partitions():
 
 def test_reading_before_any_run_is_empty():
     assert manifest.read_all() == []
+
+
+def test_latest_status_follows_run_at_not_file_order():
+    # A union merge of a local run and a CI run interleaves lines arbitrarily.
+    # Reading positionally would let an older failure override a newer success.
+    import json
+
+    from pipeline.common.storage import manifest_path
+
+    path = manifest_path()
+    path.parent.mkdir(parents=True, exist_ok=True)
+    rows = [
+        {"source": "fx_rates", "dt": DT, "status": "ok", "run_at": "2026-08-31T05:00:00Z"},
+        {"source": "fx_rates", "dt": DT, "status": "failed", "run_at": "2026-08-31T04:00:00Z"},
+    ]
+    path.write_text("\n".join(json.dumps(r) for r in rows) + "\n", encoding="utf-8")
+
+    assert manifest.latest_status(DT) == {"fx_rates": "ok"}

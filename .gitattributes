@@ -6,3 +6,7 @@
 
 # Collected data is machine-written; keep it out of diff stats and reviews.
 data/** linguist-generated=true
+
+# Append-only: a run here and a run in CI both add lines, and every line is
+# wanted. Git's union driver keeps both sides instead of raising a conflict.
+data/_manifest.jsonl merge=union

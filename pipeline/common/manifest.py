@@ -59,10 +59,12 @@ def latest_status(dt: str) -> dict[str, str]:
     """Most recent status per source for one partition.
 
     Entries are append-only, so a re-run leaves several lines for the same
-    (source, dt). The last line wins.
+    (source, dt). The latest ``run_at`` wins -- not the last line, because a
+    union merge of a local run and a CI run interleaves them in arbitrary
+    order, and reading positionally would resurrect a stale failure.
     """
     result: dict[str, str] = {}
-    for entry in read_all():
+    for entry in sorted(read_all(), key=lambda e: e.get("run_at", "")):
         if entry.get("dt") == dt:
             result[entry["source"]] = entry["status"]
     return result
