@@ -133,4 +133,7 @@ def arxiv_papers(context: AssetExecutionContext) -> MaterializeResult:
         fetch=fetch,
         normalize=normalize,
         model=ArxivPaper,
+        # Keyed so that re-reading a day can only add papers the index has
+        # since published, never drop ones already collected.
+        merge_key="arxiv_id",
     )

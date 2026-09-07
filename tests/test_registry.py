@@ -68,3 +68,11 @@ def test_wikipedia_waits_for_the_utc_day_to_publish():
     # Pageviews aggregate per UTC day and appear a few hours after it closes.
     # At 21:00 UTC the run's own UTC day has not ended, so D-1 returns 404.
     assert BY_NAME["wikipedia_top"].lag_days == 2
+
+
+def test_re_read_sources_merge_so_a_thin_read_cannot_erase_a_full_one():
+    # Overwriting would let a transient half-empty response replace a complete
+    # partition. Merging on a natural key can only add.
+    for source in SOURCES:
+        if source.recheck_days:
+            assert source.merge_key, f"{source.name} would overwrite on re-read"

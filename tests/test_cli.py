@@ -241,3 +241,83 @@ def test_repair_can_be_switched_off(fake_materialize):
     cli.main(["--sources", "fx_rates", "--no-heal"])
 
     assert [dt for _, dt in calls] == [partition_for(cli.BY_NAME["fx_rates"].lag_days)]
+
+
+# --- reading recent days again, for indexes that fill in late --------------
+
+
+def test_a_late_settling_source_is_read_again():
+    # These partitions succeeded, so the gap repair cannot see them.
+    rechecks = cli.find_rechecks(["arxiv_papers"], set())
+
+    assert len(rechecks) == cli.BY_NAME["arxiv_papers"].recheck_days
+    assert {name for _, name in rechecks} == {"arxiv_papers"}
+
+
+def test_sources_that_settle_immediately_are_not_re_read():
+    assert cli.find_rechecks(["fx_rates", "hn_stories", "city_weather"], set()) == []
+
+
+def test_a_day_already_being_repaired_is_not_read_twice():
+    due = partition_for(cli.BY_NAME["arxiv_papers"].lag_days)
+    first_back = (date.fromisoformat(due) - timedelta(days=1)).isoformat()
+
+    rechecks = cli.find_rechecks(["arxiv_papers"], {(first_back, "arxiv_papers")})
+
+    assert (first_back, "arxiv_papers") not in rechecks
+
+
+def test_re_reads_stop_at_the_due_partition():
+    due = partition_for(cli.BY_NAME["arxiv_papers"].lag_days)
+
+    assert due not in [dt for dt, _ in cli.find_rechecks(["arxiv_papers"], set())]
+
+
+def test_re_reads_do_not_reach_before_the_first_partition():
+    assert all(dt >= "2026-08-01" for dt, _ in cli.find_rechecks(["arxiv_papers"], set()))
+
+
+def test_a_failed_re_read_does_not_fail_the_run(fake_materialize):
+    fake_materialize({"arxiv_papers": False})
+
+    assert cli.run([], cli.find_rechecks(["arxiv_papers"], set())) == 0
+
+
+def test_re_reads_are_skipped_for_an_explicit_range(fake_materialize):
+    calls = fake_materialize({})
+
+    cli.main(["--sources", "arxiv_papers", "--start", "2026-08-10"])
+
+    assert [dt for _, dt in calls] == ["2026-08-10"]
+
+
+def test_a_source_failing_today_is_not_hammered_with_re_reads(fake_materialize):
+    # Three more reads would deepen a rate limit rather than escape it.
+    calls = fake_materialize({"arxiv_papers": False})
+    plan = cli.build_plan(["arxiv_papers"], None, None)
+    rechecks = cli.find_rechecks(["arxiv_papers"], set())
+
+    cli.run(plan, rechecks)
+
+    assert len(calls) == 1  # the due partition only
+
+
+def test_re_reads_still_run_when_today_succeeded(fake_materialize):
+    calls = fake_materialize({})
+    plan = cli.build_plan(["arxiv_papers"], None, None)
+    rechecks = cli.find_rechecks(["arxiv_papers"], set())
+
+    cli.run(plan, rechecks)
+
+    assert len(calls) == 1 + len(rechecks)
+
+
+def test_one_source_failing_does_not_block_another_source_re_read(fake_materialize):
+    calls = fake_materialize({"fx_rates": False})
+    plan = cli.build_plan(["fx_rates", "arxiv_papers"], None, None)
+    rechecks = cli.find_rechecks(["arxiv_papers"], set())
+
+    cli.run(plan, rechecks)
+
+    assert {name for name, _ in calls} == {"fx_rates", "arxiv_papers"}
+    assert sum(1 for n, _ in calls if n == "arxiv_papers") == 1 + len(rechecks)

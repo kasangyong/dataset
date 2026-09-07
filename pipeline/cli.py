@@ -59,6 +59,27 @@ def find_gaps(names: list[str], days: int = HEAL_DAYS) -> list[tuple[str, str]]:
     return gaps
 
 
+def find_rechecks(names: list[str], gaps: set[tuple[str, str]]) -> list[tuple[str, str]]:
+    """Recent days worth reading again even though they already succeeded.
+
+    A source whose index fills in over days lands a thin first pass, and the
+    gap repair cannot see it: the partition succeeded. Re-reading merges, so a
+    later read can only add.
+    """
+    rechecks: list[tuple[str, str]] = []
+    for name in names:
+        source = BY_NAME[name]
+        if not source.recheck_days:
+            continue
+        due = date.fromisoformat(partition_for(source.lag_days))
+        for back in range(1, source.recheck_days + 1):
+            dt = (due - timedelta(days=back)).isoformat()
+            if dt < START_DATE or (dt, name) in gaps:
+                continue  # a gap is already being retried
+            rechecks.append((dt, name))
+    return rechecks
+
+
 def date_range(start: str, end: str) -> list[str]:
     first, last = date.fromisoformat(start), date.fromisoformat(end)
     if last < first:
@@ -107,20 +128,17 @@ def build_plan(names: list[str], start: str | None, end: str | None) -> list[tup
 def run(plan: list[tuple[str, str]], healing: list[tuple[str, str]] | None = None) -> int:
     """Materialize every planned pair. Returns a process exit code.
 
-    Pairs in ``healing`` are repair attempts on partitions already known to be
-    broken. They are tried on a best-effort basis and never decide the exit
-    code: a source that is down upstream would otherwise paint every run red
-    until it recovers.
+    Pairs in ``healing`` are second looks at recent partitions -- either known
+    broken, or belonging to a source that keeps filling in after the fact. They
+    are best-effort and never decide the exit code: a source that is down
+    upstream would otherwise paint every run red until it recovers.
     """
     summary = ["| date | source | status |", "| --- | --- | --- |"]
     outcomes: dict[str, dict[str, bool]] = {}
+    refusing: set[str] = set()
 
-    for dt, name in healing or []:
-        result = materialize([BY_NAME[name].asset], partition_key=dt, raise_on_error=False)
-        verdict = "repaired" if result.success else "still failing"
-        summary.append(f"| {dt} | {name} | {verdict} |")
-        annotate("notice" if result.success else "warning", f"{name} {dt}: {verdict}")
-
+    # The day's own partitions go first, so a source that is refusing us can be
+    # spotted before the second look piles more requests onto it.
     for dt, name in plan:
         # raise_on_error=False so one dead API cannot abort the rest of the
         # matrix; the failure is already recorded in the manifest.
@@ -128,7 +146,20 @@ def run(plan: list[tuple[str, str]], healing: list[tuple[str, str]] | None = Non
         outcomes.setdefault(dt, {})[name] = result.success
         summary.append(f"| {dt} | {name} | {'ok' if result.success else 'FAILED'} |")
         if not result.success:
+            refusing.add(name)
             annotate("warning", f"{name} failed for {dt}")
+
+    for dt, name in healing or []:
+        if name in refusing:
+            # Today's read already failed. Three more would deepen a rate limit,
+            # not escape it; tomorrow's run will try again.
+            annotate("notice", f"{name} {dt}: skipped, source is failing today")
+            summary.append(f"| {dt} | {name} | skipped |")
+            continue
+        result = materialize([BY_NAME[name].asset], partition_key=dt, raise_on_error=False)
+        verdict = "ok" if result.success else "still failing"
+        summary.append(f"| {dt} | {name} | {verdict} |")
+        annotate("notice" if result.success else "warning", f"{name} {dt}: {verdict}")
 
     summarize(summary)
 
@@ -149,7 +180,7 @@ def main(argv: list[str] | None = None) -> int:
     parser.add_argument(
         "--no-heal",
         action="store_true",
-        help="skip repairing recent failed or missing partitions",
+        help="skip the second look at recent partitions",
     )
     parser.add_argument(
         "--group",
@@ -174,7 +205,11 @@ def main(argv: list[str] | None = None) -> int:
     plan = build_plan(names, args.start, args.end)
     # Only a scheduled-shape run repairs history; an explicit range means the
     # caller is choosing the partitions themselves.
-    healing = [] if (args.start or args.no_heal) else find_gaps(names)
+    if args.start or args.no_heal:
+        healing: list[tuple[str, str]] = []
+    else:
+        healing = find_gaps(names)
+        healing += find_rechecks(names, set(healing))
 
     if not plan and not healing:
         annotate("warning", "nothing to collect")
@@ -182,7 +217,7 @@ def main(argv: list[str] | None = None) -> int:
 
     print(f"collecting {len(plan)} partition-source pair(s)")
     if healing:
-        print(f"repairing {len(healing)} known-bad partition(s) from the last {HEAL_DAYS} days")
+        print(f"re-reading {len(healing)} recent partition(s)")
     code = run(plan, healing)
 
     for dt in sorted({dt for dt, _ in plan}):

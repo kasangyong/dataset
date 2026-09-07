@@ -49,6 +49,13 @@ class Source:
     # Hourly rather than daily. Follows from a short feed window.
     hourly: bool = False
 
+    # How many recent days to collect again on every scheduled run, whether or
+    # not they already succeeded. For a source whose index keeps filling in
+    # after the fact, a first pass succeeds with a fraction of the day and the
+    # gap repair never revisits it -- it only looks at failures. Requires a
+    # merge_key so a re-read can only add.
+    recheck_days: int = 0
+
 
 SOURCES = [
     Source("fx_rates", "달러 환율", fx.fx_rates),
@@ -65,7 +72,14 @@ SOURCES = [
     # rather than writing an empty partition that would read as "nothing was
     # checked that day".
     Source("fact_checks", "팩트체크 판정", fact_checks.fact_checks, merge_key="guid"),
-    Source("arxiv_papers", "arXiv 신규 논문", arxiv.arxiv_papers),
+    # arXiv's search index fills in over days rather than at once: partitions
+    # collected the next morning held 41-77 papers where days collected later
+    # held 159-347. Waiting is the cheap half of the fix; merging on arxiv_id
+    # and re-reading the last few days is the half that actually converges,
+    # and a merge can only add, so a thin re-read cannot erase a full one.
+    # The three-day lag is provisional -- arXiv rate-limited the measurement.
+    Source("arxiv_papers", "arXiv 신규 논문", arxiv.arxiv_papers,
+           lag_days=3, merge_key="arxiv_id", recheck_days=3),
     # The registry posts by US Eastern date, which is still in progress when the
     # daily run fires. Two days back is the first complete one.
     Source("clinical_trials", "임상시험 신규 등록", clinical_trials.clinical_trials,
