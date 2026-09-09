@@ -529,3 +529,16 @@
 {"bytes_curated": 2370, "bytes_raw": 12347, "dt": "2026-09-10", "duration_s": 0.581, "error": null, "invalid_rows": 0, "rows": 4, "run_at": "2026-09-09T19:23:40Z", "source": "geeknews", "status": "ok"}
 {"bytes_curated": 44192, "bytes_raw": 16932, "dt": "2026-09-10", "duration_s": 1.891, "error": null, "invalid_rows": 0, "rows": 86, "run_at": "2026-09-09T21:51:59Z", "source": "yna_news", "status": "ok"}
 {"bytes_curated": 5891, "bytes_raw": 12155, "dt": "2026-09-10", "duration_s": 0.937, "error": null, "invalid_rows": 0, "rows": 10, "run_at": "2026-09-09T21:52:00Z", "source": "geeknews", "status": "ok"}
+{"bytes_curated": 4467, "bytes_raw": 323, "dt": "2026-09-09", "duration_s": 0.572, "error": null, "invalid_rows": 0, "rows": 29, "run_at": "2026-09-09T22:53:56Z", "source": "fx_rates", "status": "ok"}
+{"bytes_curated": 47744, "bytes_raw": 50245, "dt": "2026-09-09", "duration_s": 2.225, "error": null, "invalid_rows": 0, "rows": 100, "run_at": "2026-09-09T22:53:59Z", "source": "github_repos", "status": "ok"}
+{"bytes_curated": 32267, "bytes_raw": 23591, "dt": "2026-09-09", "duration_s": 0.327, "error": null, "invalid_rows": 0, "rows": 100, "run_at": "2026-09-09T22:53:59Z", "source": "hn_stories", "status": "ok"}
+{"bytes_curated": 146388, "bytes_raw": 29636, "dt": "2026-09-08", "duration_s": 0.194, "error": null, "invalid_rows": 0, "rows": 1000, "run_at": "2026-09-09T22:53:59Z", "source": "wikipedia_top", "status": "ok"}
+{"bytes_curated": 12130, "bytes_raw": 3608, "dt": "2026-09-09", "duration_s": 0.133, "error": null, "invalid_rows": 0, "rows": 30, "run_at": "2026-09-09T22:53:59Z", "source": "earthquakes", "status": "ok"}
+{"bytes_curated": 1907, "bytes_raw": 725, "dt": "2026-09-09", "duration_s": 4.593, "error": null, "invalid_rows": 0, "rows": 8, "run_at": "2026-09-09T22:54:04Z", "source": "city_weather", "status": "ok"}
+{"bytes_curated": 2317, "bytes_raw": 67142, "dt": "2026-09-09", "duration_s": 4.466, "error": null, "invalid_rows": 0, "rows": 4, "run_at": "2026-09-09T22:54:09Z", "source": "fact_checks", "status": "ok"}
+{"bytes_curated": 457599, "bytes_raw": 166747, "dt": "2026-09-07", "duration_s": 37.876, "error": null, "invalid_rows": 0, "rows": 239, "run_at": "2026-09-09T22:54:47Z", "source": "arxiv_papers", "status": "ok"}
+{"bytes_curated": 386818, "bytes_raw": 636072, "dt": "2026-09-08", "duration_s": 0.846, "error": null, "invalid_rows": 0, "rows": 204, "run_at": "2026-09-09T22:54:48Z", "source": "clinical_trials", "status": "ok"}
+{"bytes_curated": 33428, "bytes_raw": 18539, "dt": "2026-09-10", "duration_s": 0.144, "error": null, "invalid_rows": 0, "rows": 100, "run_at": "2026-09-09T22:54:48Z", "source": "crypto_markets", "status": "ok"}
+{"bytes_curated": 207113, "bytes_raw": 76399, "dt": "2026-09-06", "duration_s": 19.103, "error": null, "invalid_rows": 0, "rows": 110, "run_at": "2026-09-09T22:55:07Z", "source": "arxiv_papers", "status": "ok"}
+{"bytes_curated": 422452, "bytes_raw": 155415, "dt": "2026-09-05", "duration_s": 7.142, "error": null, "invalid_rows": 0, "rows": 219, "run_at": "2026-09-09T22:55:14Z", "source": "arxiv_papers", "status": "ok"}
+{"bytes_curated": 699469, "bytes_raw": 250519, "dt": "2026-09-04", "duration_s": 10.789, "error": null, "invalid_rows": 0, "rows": 364, "run_at": "2026-09-09T22:55:25Z", "source": "arxiv_papers", "status": "ok"}
