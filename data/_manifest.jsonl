@@ -629,3 +629,5 @@
 {"bytes_curated": 33352, "bytes_raw": 17972, "dt": "2026-09-13", "duration_s": 0.053, "error": null, "invalid_rows": 0, "rows": 100, "run_at": "2026-09-12T22:51:21Z", "source": "crypto_markets", "status": "ok"}
 {"bytes_curated": 112725, "bytes_raw": 21199, "dt": "2026-09-13", "duration_s": 1.686, "error": null, "invalid_rows": 0, "rows": 214, "run_at": "2026-09-13T00:09:38Z", "source": "yna_news", "status": "ok"}
 {"bytes_curated": 11000, "bytes_raw": 11938, "dt": "2026-09-13", "duration_s": 0.684, "error": null, "invalid_rows": 0, "rows": 19, "run_at": "2026-09-13T00:09:39Z", "source": "geeknews", "status": "ok"}
+{"bytes_curated": 175342, "bytes_raw": 18191, "dt": "2026-09-13", "duration_s": 1.917, "error": null, "invalid_rows": 0, "rows": 334, "run_at": "2026-09-13T05:14:37Z", "source": "yna_news", "status": "ok"}
+{"bytes_curated": 15795, "bytes_raw": 12039, "dt": "2026-09-13", "duration_s": 0.714, "error": null, "invalid_rows": 0, "rows": 27, "run_at": "2026-09-13T05:14:37Z", "source": "geeknews", "status": "ok"}
