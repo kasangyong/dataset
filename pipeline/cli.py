@@ -163,11 +163,17 @@ def run(plan: list[tuple[str, str]], healing: list[tuple[str, str]] | None = Non
 
     summarize(summary)
 
-    dead_days = [dt for dt, results in outcomes.items() if not any(results.values())]
-    if dead_days:
-        # A green run with empty partitions is the failure mode this guards
-        # against: nothing collected, nobody told.
-        annotate("error", f"no data collected for: {', '.join(sorted(dead_days))}")
+    for dt, results in sorted(outcomes.items()):
+        if not any(results.values()):
+            annotate("warning", f"nothing collected for {dt} ({', '.join(sorted(results))})")
+
+    # The alarm is for a run that came back empty-handed -- every source down,
+    # nothing collected, nobody told. It deliberately does not fire per day:
+    # sources target different days now, so a day can hold a single source, and
+    # that one source failing is not an outage.
+    attempts = [ok for results in outcomes.values() for ok in results.values()]
+    if attempts and not any(attempts):
+        annotate("error", "this run collected nothing: every source failed")
         return 1
     return 0
 

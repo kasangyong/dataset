@@ -321,3 +321,26 @@ def test_one_source_failing_does_not_block_another_source_re_read(fake_materiali
 
     assert {name for name, _ in calls} == {"fx_rates", "arxiv_papers"}
     assert sum(1 for n, _ in calls if n == "arxiv_papers") == 1 + len(rechecks)
+
+
+def test_a_lone_source_failing_on_its_own_day_does_not_fail_the_run(fake_materialize):
+    # arxiv_papers is the only source with a three-day lag, so it sits alone on
+    # its partition date. Grouping the alarm by day made that one failure look
+    # like a total outage and turned the build red while the data was fine.
+    fake_materialize({"arxiv_papers": False})
+    names = ["arxiv_papers", "fx_rates", "hn_stories"]
+
+    assert cli.run(cli.build_plan(names, None, None)) == 0
+
+
+def test_a_run_that_collects_nothing_still_fails(fake_materialize):
+    names = ["arxiv_papers", "fx_rates", "hn_stories"]
+    fake_materialize({name: False for name in names})
+
+    assert cli.run(cli.build_plan(names, None, None)) == 1
+
+
+def test_an_empty_plan_is_not_an_outage(fake_materialize):
+    fake_materialize({})
+
+    assert cli.run([]) == 0
