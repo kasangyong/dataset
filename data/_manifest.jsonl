@@ -691,3 +691,6 @@
 {"bytes_curated": 14775, "bytes_raw": 12044, "dt": "2026-09-15", "duration_s": 0.852, "error": null, "invalid_rows": 0, "rows": 25, "run_at": "2026-09-15T01:16:48Z", "source": "geeknews", "status": "ok"}
 {"bytes_curated": 184196, "bytes_raw": 19222, "dt": "2026-09-15", "duration_s": 1.528, "error": null, "invalid_rows": 0, "rows": 351, "run_at": "2026-09-15T06:32:27Z", "source": "yna_news", "status": "ok"}
 {"bytes_curated": 16643, "bytes_raw": 12078, "dt": "2026-09-15", "duration_s": 0.822, "error": null, "invalid_rows": 0, "rows": 28, "run_at": "2026-09-15T06:32:28Z", "source": "geeknews", "status": "ok"}
+{"bytes_curated": 0, "bytes_raw": 0, "dt": "2026-09-15", "duration_s": 0.783, "error": "FetchError: request to https://www.yna.co.kr/rss/news.xml failed: ('Connection aborted.', ConnectionResetError(104, 'Connection reset by peer'))", "invalid_rows": 0, "rows": 0, "run_at": "2026-09-15T12:32:17Z", "source": "yna_news", "status": "failed"}
+{"bytes_curated": 247805, "bytes_raw": 19377, "dt": "2026-09-15", "duration_s": 1.116, "error": null, "invalid_rows": 0, "rows": 471, "run_at": "2026-09-15T12:32:23Z", "source": "yna_news", "status": "ok"}
+{"bytes_curated": 20786, "bytes_raw": 12216, "dt": "2026-09-15", "duration_s": 0.596, "error": null, "invalid_rows": 0, "rows": 35, "run_at": "2026-09-15T12:32:23Z", "source": "geeknews", "status": "ok"}
