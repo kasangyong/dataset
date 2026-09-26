@@ -1013,3 +1013,5 @@
 {"bytes_curated": 0, "bytes_raw": 0, "dt": "2026-09-24", "duration_s": 0.059, "error": "FetchError: http://export.arxiv.org/api/query returned 406: ", "invalid_rows": 0, "rows": 0, "run_at": "2026-09-26T23:22:58Z", "source": "arxiv_papers", "status": "failed"}
 {"bytes_curated": 450958, "bytes_raw": 736269, "dt": "2026-09-25", "duration_s": 1.201, "error": null, "invalid_rows": 0, "rows": 231, "run_at": "2026-09-26T23:22:59Z", "source": "clinical_trials", "status": "ok"}
 {"bytes_curated": 33297, "bytes_raw": 18212, "dt": "2026-09-27", "duration_s": 0.058, "error": null, "invalid_rows": 0, "rows": 100, "run_at": "2026-09-26T23:23:00Z", "source": "crypto_markets", "status": "ok"}
+{"bytes_curated": 105989, "bytes_raw": 20501, "dt": "2026-09-27", "duration_s": 1.365, "error": null, "invalid_rows": 0, "rows": 202, "run_at": "2026-09-26T23:46:25Z", "source": "yna_news", "status": "ok"}
+{"bytes_curated": 10589, "bytes_raw": 12074, "dt": "2026-09-27", "duration_s": 0.654, "error": null, "invalid_rows": 0, "rows": 18, "run_at": "2026-09-26T23:46:26Z", "source": "geeknews", "status": "ok"}
