@@ -1067,3 +1067,5 @@
 {"bytes_curated": 0, "bytes_raw": 0, "dt": "2026-09-20", "duration_s": 0.126, "error": "FetchError: http://export.arxiv.org/api/query returned 429: ", "invalid_rows": 0, "rows": 0, "run_at": "2026-09-29T00:50:20Z", "source": "arxiv_papers", "status": "failed"}
 {"bytes_curated": 121216, "bytes_raw": 18564, "dt": "2026-09-29", "duration_s": 1.115, "error": null, "invalid_rows": 0, "rows": 234, "run_at": "2026-09-29T01:37:19Z", "source": "yna_news", "status": "ok"}
 {"bytes_curated": 18355, "bytes_raw": 12079, "dt": "2026-09-29", "duration_s": 0.895, "error": null, "invalid_rows": 0, "rows": 32, "run_at": "2026-09-29T01:37:20Z", "source": "geeknews", "status": "ok"}
+{"bytes_curated": 183807, "bytes_raw": 19041, "dt": "2026-09-29", "duration_s": 1.87, "error": null, "invalid_rows": 0, "rows": 354, "run_at": "2026-09-29T08:07:09Z", "source": "yna_news", "status": "ok"}
+{"bytes_curated": 23729, "bytes_raw": 12117, "dt": "2026-09-29", "duration_s": 0.812, "error": null, "invalid_rows": 0, "rows": 41, "run_at": "2026-09-29T08:07:10Z", "source": "geeknews", "status": "ok"}
