@@ -1344,3 +1344,5 @@
 {"bytes_curated": 0, "bytes_raw": 0, "dt": "2026-10-08", "duration_s": 31.008, "error": "FetchError: http://export.arxiv.org/api/query returned 429: Rate exceeded.", "invalid_rows": 0, "rows": 0, "run_at": "2026-10-11T00:07:52Z", "source": "arxiv_papers", "status": "failed"}
 {"bytes_curated": 416242, "bytes_raw": 628655, "dt": "2026-10-09", "duration_s": 0.603, "error": null, "invalid_rows": 0, "rows": 215, "run_at": "2026-10-11T00:07:53Z", "source": "clinical_trials", "status": "ok"}
 {"bytes_curated": 33290, "bytes_raw": 17945, "dt": "2026-10-11", "duration_s": 0.101, "error": null, "invalid_rows": 0, "rows": 100, "run_at": "2026-10-11T00:07:53Z", "source": "crypto_markets", "status": "ok"}
+{"bytes_curated": 105925, "bytes_raw": 20059, "dt": "2026-10-11", "duration_s": 1.817, "error": null, "invalid_rows": 0, "rows": 202, "run_at": "2026-10-11T00:22:22Z", "source": "yna_news", "status": "ok"}
+{"bytes_curated": 7076, "bytes_raw": 12145, "dt": "2026-10-11", "duration_s": 0.87, "error": null, "invalid_rows": 0, "rows": 12, "run_at": "2026-10-11T00:22:23Z", "source": "geeknews", "status": "ok"}
