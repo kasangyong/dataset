@@ -1421,3 +1421,5 @@
 {"bytes_curated": 0, "bytes_raw": 0, "dt": "2026-10-15", "duration_s": 0.925, "error": "ParseError: not well-formed (invalid token): line 1155, column 80", "invalid_rows": 0, "rows": 0, "run_at": "2026-10-14T16:51:19Z", "source": "yna_news", "status": "failed"}
 {"bytes_curated": 0, "bytes_raw": 0, "dt": "2026-10-15", "duration_s": 0.936, "error": "ParseError: not well-formed (invalid token): line 1155, column 80", "invalid_rows": 0, "rows": 0, "run_at": "2026-10-14T16:51:55Z", "source": "yna_news", "status": "failed"}
 {"bytes_curated": 1092, "bytes_raw": 12122, "dt": "2026-10-15", "duration_s": 4.383, "error": null, "invalid_rows": 0, "rows": 2, "run_at": "2026-10-14T16:51:59Z", "source": "geeknews", "status": "ok"}
+{"bytes_curated": 13850, "bytes_raw": 18288, "dt": "2026-10-15", "duration_s": 1.942, "error": null, "invalid_rows": 0, "rows": 27, "run_at": "2026-10-14T20:31:09Z", "source": "yna_news", "status": "ok"}
+{"bytes_curated": 7044, "bytes_raw": 12087, "dt": "2026-10-15", "duration_s": 0.8, "error": null, "invalid_rows": 0, "rows": 12, "run_at": "2026-10-14T20:31:10Z", "source": "geeknews", "status": "ok"}
