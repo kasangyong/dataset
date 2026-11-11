@@ -2126,3 +2126,5 @@
 {"bytes_curated": 0, "bytes_raw": 0, "dt": "2026-11-05", "duration_s": 3.416, "error": "FetchError: http://export.arxiv.org/api/query returned 429: Rate exceeded.", "invalid_rows": 0, "rows": 0, "run_at": "2026-11-11T01:02:27Z", "source": "arxiv_papers", "status": "failed"}
 {"bytes_curated": 116035, "bytes_raw": 19278, "dt": "2026-11-11", "duration_s": 1.48, "error": null, "invalid_rows": 0, "rows": 222, "run_at": "2026-11-11T02:11:30Z", "source": "yna_news", "status": "ok"}
 {"bytes_curated": 1159, "bytes_raw": 9144, "dt": "2026-11-11", "duration_s": 0.768, "error": null, "invalid_rows": 0, "rows": 1, "run_at": "2026-11-11T02:11:31Z", "source": "geeknews", "status": "ok"}
+{"bytes_curated": 179999, "bytes_raw": 19790, "dt": "2026-11-11", "duration_s": 1.715, "error": null, "invalid_rows": 0, "rows": 342, "run_at": "2026-11-11T09:45:30Z", "source": "yna_news", "status": "ok"}
+{"bytes_curated": 1159, "bytes_raw": 9445, "dt": "2026-11-11", "duration_s": 0.593, "error": null, "invalid_rows": 0, "rows": 1, "run_at": "2026-11-11T09:45:30Z", "source": "geeknews", "status": "ok"}
