@@ -2353,3 +2353,5 @@
 {"bytes_curated": 569969, "bytes_raw": 209287, "dt": "2026-11-16", "duration_s": 7.418, "error": null, "invalid_rows": 0, "rows": 294, "run_at": "2026-11-22T00:56:23Z", "source": "arxiv_papers", "status": "ok"}
 {"bytes_curated": 73113, "bytes_raw": 19991, "dt": "2026-11-22", "duration_s": 1.111, "error": null, "invalid_rows": 0, "rows": 139, "run_at": "2026-11-22T01:03:26Z", "source": "yna_news", "status": "ok"}
 {"bytes_curated": 1003, "bytes_raw": 8903, "dt": "2026-11-22", "duration_s": 0.532, "error": null, "invalid_rows": 0, "rows": 1, "run_at": "2026-11-22T01:03:27Z", "source": "geeknews", "status": "ok"}
+{"bytes_curated": 135206, "bytes_raw": 18634, "dt": "2026-11-22", "duration_s": 1.668, "error": null, "invalid_rows": 0, "rows": 259, "run_at": "2026-11-22T08:38:10Z", "source": "yna_news", "status": "ok"}
+{"bytes_curated": 1003, "bytes_raw": 9404, "dt": "2026-11-22", "duration_s": 0.435, "error": null, "invalid_rows": 0, "rows": 1, "run_at": "2026-11-22T08:38:10Z", "source": "geeknews", "status": "ok"}
